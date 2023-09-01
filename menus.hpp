@@ -12,5 +12,6 @@ class Menus{
         string gameLoop();
         string exitScreen();
     private:
-    int splashCount;
+        int splashCount;
+        string Test;
 };

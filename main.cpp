@@ -10,7 +10,7 @@ int main(void){
 
     InitWindow(screenWidth, screenHeight, "Solitaire");
     SetTargetFPS(60);
-    bool looping = true; 
+    
     string screen = "splash";
     Menus displayScreen;
     displayScreen.menusInit();
@@ -31,3 +31,6 @@ int main(void){
     CloseWindow(); 
     return 0;
 }
+
+// Change the font 
+// Costomize this to be super solitaire looking 

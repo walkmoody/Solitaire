@@ -32,7 +32,7 @@ string Menus::mainMenu(){
         return "instructions";
     BeginDrawing();
 
-            ClearBackground(WHITE);
+            ClearBackground(GREEN);
             
             DrawText("Menu test;", 250, 300, 30, LIGHTGRAY);
 
@@ -43,8 +43,10 @@ string Menus::mainMenu(){
 
 string Menus::instructions(){
     while(!WindowShouldClose()){
-        if(IsKeyDown(KEY_SPACE))
+        if(IsKeyDown(KEY_SPACE)){
             return "game";
+            std::cout << "test" << std::endl; // REMOVE ME 
+        }
         if(IsKeyDown(KEY_P))
             return "menu";
 
