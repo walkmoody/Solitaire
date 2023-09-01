@@ -26,6 +26,10 @@ string Menus::splash(){ // Slooping
 
 string Menus::mainMenu(){
     while(!WindowShouldClose()){
+    if(IsKeyDown(KEY_SPACE))
+        return "game";
+    if(IsKeyDown(KEY_I))
+        return "instructions";
     BeginDrawing();
 
             ClearBackground(WHITE);
@@ -38,10 +42,34 @@ string Menus::mainMenu(){
 }
 
 string Menus::instructions(){
+    while(!WindowShouldClose()){
+        if(IsKeyDown(KEY_SPACE))
+            return "game";
+        if(IsKeyDown(KEY_P))
+            return "menu";
+
+        BeginDrawing();
+
+                ClearBackground(WHITE);
+                
+                DrawText("Instructions test;", 250, 300, 30, LIGHTGRAY);
+
+        EndDrawing();
+    }
     return "quit";
 }
 
 string Menus::gameLoop(){
+    while(!WindowShouldClose()){
+    
+    BeginDrawing();
+
+            ClearBackground(WHITE);
+            
+            DrawText("Gamee test;", 250, 300, 30, LIGHTGRAY);
+
+    EndDrawing();
+    }
     return "quit";
 }
 

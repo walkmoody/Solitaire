@@ -15,9 +15,7 @@ int main(void){
     Menus displayScreen;
     displayScreen.menusInit();
 
-    while(looping){
-        if(WindowShouldClose())
-            break;
+    while(!WindowShouldClose()){ // Menu system breaks if spammed multiple times
         if(screen == "splash")
             screen = displayScreen.splash();
         else if(screen == "menu")
@@ -27,8 +25,7 @@ int main(void){
         else if(screen == "game")
             screen = displayScreen.gameLoop();
         else if (screen == "quit")
-            looping = false;
-        
+            break;
     }
     
     CloseWindow(); 
