@@ -1,5 +1,6 @@
 #include <iostream>
 #include "games.hpp"
+#include <map>
 using std::string;
 
 void Game::GamesInit(){
@@ -8,15 +9,23 @@ void Game::GamesInit(){
 }
 
 void Game::Randomizer(){
-
-} // Should put everything into a map 
-  // 1 - 52 each should be randomized 
-  // 1/2 red
-  // 1-13
-  // 1/4 clubs
-  // 1/4 spaces
-  // 1/4 diamonds
-  // 1/4 hearts
+    int num = 0;
+    for(int i = 0; i < cardTot; i++){ // 52 = amount of cards
+        bool reset = true;
+        if (i == 0)
+            cardKey[i] = rand() % cardTot;
+        else{ while(reset){
+            reset = false;
+            num = rand() % cardTot;
+            for(int j = 0; j < i; j++){
+                if (num == cardKey[j])
+                    reset = true;
+                }}
+            cardKey[i] = num;
+        }
+        std::cout << cardKey[i] << std::endl;
+    }
+} 
 
 string Game::GameLoop(){
 
@@ -33,4 +42,9 @@ string Game::GameLoop(){
         EndDrawing();
     }
     return "menu";
+}
+
+void Game::deconstuct(){
+
+
 }

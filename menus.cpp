@@ -67,7 +67,7 @@ string Menus::gameLoop(){
     Game solitaire;
     solitaire.GamesInit();
     retType = solitaire.GameLoop();
-   
+    solitaire.deconstuct();
     return retType;
 }
 
