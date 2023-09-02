@@ -1,13 +1,14 @@
 #include <iostream>
 #include "include/raylib.h"
+using std::string;
 
 class Game{
     public:
         void GamesInit();
-        void GameLoop();
+        string GameLoop();
         void Randomizer(); // Called in init
     private:
-
+        bool looping;
 };
 
 // THINGS NEEDED

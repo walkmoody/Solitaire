@@ -1,5 +1,6 @@
 #include <iostream>
 #include "menus.hpp"
+#include "games.hpp"
 #include "include/raylib.h"
 
 using std::string;
@@ -26,18 +27,18 @@ string Menus::splash(){ // Slooping
 
 string Menus::mainMenu(){
     while(!WindowShouldClose()){
-    if(IsKeyDown(KEY_SPACE))
-        return "game";
-    if(IsKeyDown(KEY_I))
-        return "instructions";
-    BeginDrawing();
+        if(IsKeyDown(KEY_SPACE))
+            return "game";
+        if(IsKeyDown(KEY_I))
+            return "instructions";
+        BeginDrawing();
 
             ClearBackground(GREEN);
             
             DrawText("Menu test;", 250, 300, 30, LIGHTGRAY);
 
-    EndDrawing();
-    }
+        EndDrawing();
+        }
     return "quit";
 }
 
@@ -62,17 +63,12 @@ string Menus::instructions(){
 }
 
 string Menus::gameLoop(){
-    while(!WindowShouldClose()){
-    
-    BeginDrawing();
-
-            ClearBackground(WHITE);
-            
-            DrawText("Gamee test;", 250, 300, 30, LIGHTGRAY);
-
-    EndDrawing();
-    }
-    return "quit";
+    string retType = "";
+    Game solitaire;
+    solitaire.GamesInit();
+    retType = solitaire.GameLoop();
+   
+    return retType;
 }
 
 string Menus::exitScreen(){
