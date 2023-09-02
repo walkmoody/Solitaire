@@ -32,20 +32,18 @@ string Game::GameLoop(){
     Color ballColor = DARKBLUE;
     
     float roundness = 0.2f;
-    float width = 200.0f;
-    float height = 100.0f;
+    float width = 100.0f;
+    float height = 150.0f;
     float segments = 0.0f;
-    float lineThick = 1.0f;
 
-    bool drawRect = false;
-    bool drawRoundedRect = true;
-    bool drawRoundedLines = false;
+    //DrawRectangleRec(rec, Fade(GOLD, 0.6f));
+    //DrawRectangleRoundedLines(rec, roundness, (int)segments, lineThick, Fade(MAROON, 0.4f));
 
     
     while(looping){
         if(WindowShouldClose())
             return "quit";
-        mousePosition = GetMousePosition();
+        mousePosition = GetMousePosition(); // Mouse tracker 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) ballColor = MAROON;
         else if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE)) ballColor = LIME;
         else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) ballColor = DARKBLUE;
@@ -63,13 +61,11 @@ string Game::GameLoop(){
             DrawLine(0, 125, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.6f));
             DrawRectangle(0, 0, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.3f));
 
-            if (drawRect) DrawRectangleRec(rec, Fade(GOLD, 0.6f));
-            if (drawRoundedRect) DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
-            if (drawRoundedLines) DrawRectangleRoundedLines(rec, roundness, (int)segments, lineThick, Fade(MAROON, 0.4f));
-
-            ClearBackground(WHITE);
+            
+            DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
+            
+            ClearBackground(GREEN); // 0 228, 48, 255
             DrawCircleV(mousePosition, 40, ballColor);
-            DrawText("Gamee test;", 250, 300, 30, LIGHTGRAY);
 
         EndDrawing();
     }
