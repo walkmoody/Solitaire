@@ -16,14 +16,14 @@ string Game::GameLoop(){
     while(looping){
         if(WindowShouldClose())
             return "quit";
-    
-    BeginDrawing();
+        
+        BeginDrawing();
 
-            ClearBackground(WHITE);
-            
-            DrawText("Gamee test;", 250, 300, 30, LIGHTGRAY);
+                ClearBackground(WHITE);
+                
+                DrawText("Gamee test;", 250, 300, 30, LIGHTGRAY);
 
-    EndDrawing();
+        EndDrawing();
     }
-
+    return "menu";
 }
