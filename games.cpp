@@ -9,7 +9,14 @@ void Game::GamesInit(){
 
 void Game::Randomizer(){
 
-}
+} // Should put everything into a map 
+  // 1 - 52 each should be randomized 
+  // 1/2 red
+  // 1-13
+  // 1/4 clubs
+  // 1/4 spaces
+  // 1/4 diamonds
+  // 1/4 hearts
 
 string Game::GameLoop(){
 
