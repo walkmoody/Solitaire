@@ -27,6 +27,7 @@ class Game{
             // 1/4 hearts
         int cardTot = 52;
         int cardKey[52];
+        Vector2 mousePosition = { -100.0f, -100.0f };
 };
 
 // THINGS NEEDED
