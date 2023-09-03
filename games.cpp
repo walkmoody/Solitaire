@@ -5,11 +5,90 @@ using std::string;
 
 void Game::GamesInit(){
     Randomizer();
+    patternGen();
     looping = true;
     recX[0] = 100;
     recY[0] = 150;
     recXCopy = recX[0];
     recYCopy = recY[0];
+}
+
+/*
+How it should be printed
+1st row
+0 - 2
+2nd row 
+1 - 3
+3rd row 
+1 - 3
+4th row
+1 - 4
+5th row
+3 - 5
+6th row
+4 - 5
+7th row
+5 - 6
+1   2   3   4   5   6   7   
+
+*/
+
+void Game::patternGen(){
+    int cardNum = 0;
+    int ranNum = rand() % 2;
+    row1tot = ranNum;
+    for (int i = 0; i < ranNum; i++)
+        row1[i] = i;
+    cardNum = row1tot;
+
+    ranNum = rand() % 3;
+    while(ranNum < 1 && ranNum > 3)
+        ranNum = rand() % 3;
+    row2tot = ranNum;
+    for (int i = 0; i < ranNum; i++)
+        row2[i] = cardNum + i;
+    cardNum += row2tot;
+
+    ranNum = rand() % 3;
+    while(ranNum < 1 && ranNum > 3)
+        ranNum = rand() % 3;
+    row3tot = ranNum;
+    for (int i = 0; i < ranNum; i++)
+        row3[i] = cardNum + i;
+    cardNum = row3tot;
+
+    ranNum = rand() % 4;
+    while(ranNum < 1 && ranNum > 4)
+        ranNum = rand() % 4;
+    row4tot = ranNum;
+    for (int i = 0; i < ranNum; i++)
+        row4[i] = cardNum + i;
+    cardNum = row4tot;
+
+    ranNum = rand() % 5;
+    while(ranNum < 3 && ranNum > 5)
+        ranNum = rand() % 4;
+    row5tot = ranNum;
+    for (int i = 0; i < ranNum; i++)
+        row5[i] = cardNum + i;
+    cardNum = row5tot;
+
+    ranNum = rand() % 5;
+    while(ranNum < 4 && ranNum > 5)
+        ranNum = rand() % 4;
+    row6tot = ranNum;
+    for (int i = 0; i < ranNum; i++)
+        row6[i] = cardNum + i;
+    cardNum = row6tot;
+
+    ranNum = rand() % 6;
+    while(ranNum < 5 && ranNum > 6)
+        ranNum = rand() % 6;
+    row7tot = ranNum;
+    for (int i = 0; i < ranNum; i++)
+        row6[i] = cardNum + i;
+    cardNum = row7tot;
+    
 }
 
 void Game::Randomizer(){
@@ -74,25 +153,7 @@ void Game::cardLinker(){
     cardBack = LoadTextureFromImage(card);
     UnloadImage(card);
 }
-/*
-How it should be printed
-1st row
-0 - 2
-2nd row 
-1 - 3
-3rd row 
-1 - 3
-4th row
-1 - 4
-5th row
-3 - 5
-6th row
-4 - 5
-7th row
-5 - 6
-1   2   3   4   5   6   7   
 
-*/
 void Game::cardPrint(){
     DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
     DrawTexture(cardBack, 170, 150, WHITE);           
@@ -131,7 +192,7 @@ string Game::GameLoop(){
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f));
                 DrawLine(0, 125, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.6f));
                 DrawRectangle(0, 0, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.3f));
-                
+                cardPrint();
 
         EndDrawing();
     }

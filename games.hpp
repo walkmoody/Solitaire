@@ -13,6 +13,7 @@ class Game{
         void cardLinker();
         void cardGrab();
         void cardPrint();
+        void patternGen();
     private:
         bool looping;
         map<int, string> cards{{0, "Diamond"}, {1, "Diamond"}, {2, "Diamond"}, {3,"Diamond"}, {4, "Diamond"}, {5, "Diamond"}, {6, "Diamond"}, {7, "Diamond"}, {8, "Diamond"},
@@ -42,6 +43,20 @@ class Game{
         float segments = 0.0f;
         Texture2D cardTexture[52];
         Texture2D cardBack;
+        int row1[13];
+        int row1tot;
+        int row2[13];
+        int row2tot;
+        int row3[13];
+        int row3tot;
+        int row4[13];
+        int row4tot;
+        int row5[13];
+        int row5tot;
+        int row6[13];
+        int row6tot;
+        int row7[13];
+        int row7tot;
 
 
 };
