@@ -14,6 +14,7 @@ class Game{
         void cardGrab();
         void cardPrint();
         void patternGen();
+        void cardCoord();
     private:
         bool looping;
         map<int, string> cards{{0, "Diamond"}, {1, "Diamond"}, {2, "Diamond"}, {3,"Diamond"}, {4, "Diamond"}, {5, "Diamond"}, {6, "Diamond"}, {7, "Diamond"}, {8, "Diamond"},
@@ -57,6 +58,7 @@ class Game{
         int row6tot;
         int row7[13];
         int row7tot;
+        int currTot;
 
 
 };

@@ -11,8 +11,68 @@ void Game::GamesInit(){
     recY[0] = 150;
     recXCopy = recX[0];
     recYCopy = recY[0];
+    cardCoord();
 }
 
+void Game::cardCoord(){
+    int j =0;
+    currTot = 0;
+    for (int i = currTot; i < row1tot; i++){
+        recX[i] = 25; 
+        recY[i] = 150 + i * 25;
+    }
+    currTot = currTot + row1tot;
+
+    j = 0;
+    for (int i = currTot; i < currTot + row2tot; i++){
+        recX[i] = 150; 
+        recY[i] = 150 + j * 25;
+        j++;
+    }
+    currTot = currTot + row2tot;
+
+    j = 0;
+    for (int i = currTot; i < currTot + row3tot; i++){
+        recX[i] = 275; 
+        recY[i] = 150 + j * 25;
+        j++;
+    }
+    currTot = currTot + row3tot;
+
+    j = 0;
+    for (int i = currTot; i < currTot + row4tot; i++){
+        recX[i] = 400; 
+        recY[i] = 150 + j * 25;
+        j++;
+    }
+    currTot = currTot + row4tot;
+
+    j = 0;
+    for (int i = currTot; i < currTot + row5tot; i++){
+        recX[i] = 525; 
+        recY[i] = 150 + j * 25;
+        j++;
+    }
+    currTot = currTot + row5tot;
+
+    j = 0;
+    for (int i = currTot; i < currTot + row6tot; i++){
+        recX[i] = 650; 
+        recY[i] = 150 + j * 25;
+        j++;
+    }
+    currTot = currTot + row6tot;
+
+    j = 0;
+    for (int i = currTot; i < currTot + row7tot; i++){
+        recX[i] = 775; 
+        recY[i] = 150 + j * 25;
+        j++;
+    }
+    currTot = currTot + row7tot;
+
+
+}
 /*
 How it should be printed
 1st row
@@ -42,7 +102,7 @@ void Game::patternGen(){
     cardNum = row1tot;
 
     ranNum = rand() % 3;
-    while(ranNum < 1 && ranNum > 3)
+    while(ranNum < 1 || ranNum > 3)
         ranNum = rand() % 3;
     row2tot = ranNum;
     for (int i = 0; i < ranNum; i++)
@@ -50,7 +110,7 @@ void Game::patternGen(){
     cardNum += row2tot;
 
     ranNum = rand() % 3;
-    while(ranNum < 1 && ranNum > 3)
+    while(ranNum < 1 || ranNum > 3)
         ranNum = rand() % 3;
     row3tot = ranNum;
     for (int i = 0; i < ranNum; i++)
@@ -58,7 +118,7 @@ void Game::patternGen(){
     cardNum = row3tot;
 
     ranNum = rand() % 4;
-    while(ranNum < 1 && ranNum > 4)
+    while(ranNum < 1 || ranNum > 4)
         ranNum = rand() % 4;
     row4tot = ranNum;
     for (int i = 0; i < ranNum; i++)
@@ -66,23 +126,23 @@ void Game::patternGen(){
     cardNum = row4tot;
 
     ranNum = rand() % 5;
-    while(ranNum < 3 && ranNum > 5)
-        ranNum = rand() % 4;
+    while(ranNum < 3 || ranNum > 5)
+        ranNum = rand() % 5;
     row5tot = ranNum;
     for (int i = 0; i < ranNum; i++)
         row5[i] = cardNum + i;
     cardNum = row5tot;
 
     ranNum = rand() % 5;
-    while(ranNum < 4 && ranNum > 5)
-        ranNum = rand() % 4;
+    while(ranNum < 4 || ranNum > 5)
+        ranNum = rand() % 5;
     row6tot = ranNum;
     for (int i = 0; i < ranNum; i++)
         row6[i] = cardNum + i;
     cardNum = row6tot;
 
     ranNum = rand() % 6;
-    while(ranNum < 5 && ranNum > 6)
+    while(ranNum < 5 || ranNum > 6)
         ranNum = rand() % 6;
     row7tot = ranNum;
     for (int i = 0; i < ranNum; i++)
@@ -155,8 +215,13 @@ void Game::cardLinker(){
 }
 
 void Game::cardPrint(){
-    DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
-    DrawTexture(cardBack, 170, 150, WHITE);           
+    
+    for(int i = 0; i < currTot; i++){
+        DrawTexture(cardTexture[i], recX[i], recY[i], WHITE);
+    }
+
+    //DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
+    //DrawTexture(cardBack, 170, 150, WHITE);           
 
 }
 
@@ -165,13 +230,14 @@ void Game::cardGrab(){
     float mouseX = mousePosition.x;
     float mouseY = mousePosition.y; 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
-        if (float(mouseX) > float(recX[0]) && float(mouseX) < float(recX[0]+ width) && float(mouseY) > float(recY[0]) && float(mouseY) < float(recY[0] + height)){
-            recX[0] = mouseX - width/2;
-            recY[0] = mouseY - height/2;
+        for (int i = 0; i < currTot; i++)
+        if (float(mouseX) > float(recX[i]) && float(mouseX) < float(recX[i]+ width) && float(mouseY) > float(recY[i]) && float(mouseY) < float(recY[i] + height)){
+            recX[i] = mouseX - width/2;
+            recY[i] = mouseY - height/2;
         }
         else{ // Snaps card back
-            recX[0] = recXCopy;
-            recY[0] = recYCopy;
+            //recX[0] = recXCopy;
+            //recY[0] = recYCopy;
         }
     }
 }
@@ -189,9 +255,9 @@ string Game::GameLoop(){
             ClearBackground(LIME);
                 
                 DrawLine(GetScreenWidth() - 150, 0, GetScreenWidth() - 150, GetScreenHeight(), Fade(LIGHTGRAY, 0.6f));
-                DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f));
-                DrawLine(0, 125, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.6f));
-                DrawRectangle(0, 0, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.3f));
+                DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f)); // bar on right side
+                DrawLine(0, 200, GetScreenWidth() - 150, 200, Fade(LIGHTGRAY, 0.6f));
+                DrawRectangle(0, 0, GetScreenWidth() - 150, 200, Fade(LIGHTGRAY, 0.3f));
                 cardPrint();
 
         EndDrawing();
@@ -203,5 +269,6 @@ void Game::deconstuct(){
     for (int i = 0; i < cardTot; i++){
        UnloadTexture(cardTexture[i]);
     }
+    UnloadTexture(cardBack);
 
 }
