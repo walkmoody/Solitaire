@@ -19,14 +19,14 @@ void Game::cardCoord(){
     currTot = 0;
     for (int i = currTot; i < row1tot; i++){
         recX[i] = 25; 
-        recY[i] = 150 + i * 25;
+        recY[i] = 200 + i * 25;
     }
     currTot = currTot + row1tot;
 
     j = 0;
     for (int i = currTot; i < currTot + row2tot; i++){
         recX[i] = 150; 
-        recY[i] = 150 + j * 25;
+        recY[i] = 200 + j * 25;
         j++;
     }
     currTot = currTot + row2tot;
@@ -34,7 +34,7 @@ void Game::cardCoord(){
     j = 0;
     for (int i = currTot; i < currTot + row3tot; i++){
         recX[i] = 275; 
-        recY[i] = 150 + j * 25;
+        recY[i] = 200 + j * 25;
         j++;
     }
     currTot = currTot + row3tot;
@@ -42,7 +42,7 @@ void Game::cardCoord(){
     j = 0;
     for (int i = currTot; i < currTot + row4tot; i++){
         recX[i] = 400; 
-        recY[i] = 150 + j * 25;
+        recY[i] = 200 + j * 25;
         j++;
     }
     currTot = currTot + row4tot;
@@ -50,7 +50,7 @@ void Game::cardCoord(){
     j = 0;
     for (int i = currTot; i < currTot + row5tot; i++){
         recX[i] = 525; 
-        recY[i] = 150 + j * 25;
+        recY[i] = 200 + j * 25;
         j++;
     }
     currTot = currTot + row5tot;
@@ -58,7 +58,7 @@ void Game::cardCoord(){
     j = 0;
     for (int i = currTot; i < currTot + row6tot; i++){
         recX[i] = 650; 
-        recY[i] = 150 + j * 25;
+        recY[i] = 200 + j * 25;
         j++;
     }
     currTot = currTot + row6tot;
@@ -66,7 +66,7 @@ void Game::cardCoord(){
     j = 0;
     for (int i = currTot; i < currTot + row7tot; i++){
         recX[i] = 775; 
-        recY[i] = 150 + j * 25;
+        recY[i] = 200 + j * 25;
         j++;
     }
     currTot = currTot + row7tot;
@@ -256,8 +256,8 @@ string Game::GameLoop(){
                 
                 DrawLine(GetScreenWidth() - 150, 0, GetScreenWidth() - 150, GetScreenHeight(), Fade(LIGHTGRAY, 0.6f));
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f)); // bar on right side
-                DrawLine(0, 200, GetScreenWidth() - 150, 200, Fade(LIGHTGRAY, 0.6f));
-                DrawRectangle(0, 0, GetScreenWidth() - 150, 200, Fade(LIGHTGRAY, 0.3f));
+                DrawLine(0, 180, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.6f));
+                DrawRectangle(0, 0, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.3f));
                 cardPrint();
 
         EndDrawing();
