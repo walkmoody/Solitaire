@@ -46,7 +46,7 @@ void Game::cardLinker(){
         else if (cardKey[i] % 13 == 12)
             cardPull = cardPull + "king_of_";
         else{
-            string temp = std::to_string(cardKey[i] % 13);
+            string temp = std::to_string(cardKey[i] % 13 + 1);
             cardPull = cardPull + temp + "_of_";
         }
 
@@ -76,6 +76,9 @@ string Game::GameLoop(){
     while(looping){
         if(WindowShouldClose())
             return "quit";
+        if(IsKeyPressed(KEY_P)){
+            return "menu";
+        }
         mousePosition = GetMousePosition(); // Mouse tracker 
         float mouseX = mousePosition.x;
         float mouseY = mousePosition.y; 

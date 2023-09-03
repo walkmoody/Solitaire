@@ -10,7 +10,10 @@ int main(void){
 
     InitWindow(screenWidth, screenHeight, "Solitaire");
     SetTargetFPS(120);
-    
+    Image icon = LoadImage("resources/icon.png");
+    SetWindowIcon(icon);
+    UnloadImage(icon);
+
     string screen = "splash";
     Menus displayScreen;
     displayScreen.menusInit();

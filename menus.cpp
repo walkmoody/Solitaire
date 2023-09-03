@@ -35,7 +35,7 @@ string Menus::mainMenu(){
 
             ClearBackground(GREEN);
             
-            DrawText("Menu test;", 250, 300, 30, LIGHTGRAY);
+            DrawText("SOLITAIRE", 250, 300, 80, LIGHTGRAY);
 
         EndDrawing();
         }
