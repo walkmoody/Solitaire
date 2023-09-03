@@ -49,6 +49,7 @@ void Game::cardLinker(){
             string temp = std::to_string(cardKey[i] % 13 + 1);
             cardPull = cardPull + temp + "_of_";
         }
+
         if (cards[cardKey[i]] == "Diamond"){
             cardPull = cardPull + "diamonds.png";
         }
