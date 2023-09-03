@@ -9,7 +9,7 @@ using std::string;
 int main(void){
 
     InitWindow(screenWidth, screenHeight, "Solitaire");
-    SetTargetFPS(60);
+    SetTargetFPS(120);
     
     string screen = "splash";
     Menus displayScreen;

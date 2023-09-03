@@ -35,6 +35,8 @@ string Game::GameLoop(){
     float width = 100.0f;
     float height = 150.0f;
     float segments = 0.0f;
+    recX[0] = 100;
+    recY[0] = 100;
 
     //DrawRectangleRec(rec, Fade(GOLD, 0.6f));
     //DrawRectangleRoundedLines(rec, roundness, (int)segments, lineThick, Fade(MAROON, 0.4f));
@@ -44,7 +46,14 @@ string Game::GameLoop(){
         if(WindowShouldClose())
             return "quit";
         mousePosition = GetMousePosition(); // Mouse tracker 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) ballColor = MAROON;
+        float mouseX = mousePosition.x;
+        float mouseY = mousePosition.y; 
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){ ballColor = MAROON;
+            if (float(mouseX) > float(recX[0]) && float(mouseX) < float(recX[0]+ width) && float(mouseY) > float(recY[0]) && float(mouseY) < float(recY[0] + height)){
+                recX[0] = mouseX - width/2;
+                recY[0] = mouseY - height/2;
+            }
+        }
         else if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE)) ballColor = LIME;
         else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) ballColor = DARKBLUE;
         else if (IsMouseButtonPressed(MOUSE_BUTTON_SIDE)) ballColor = PURPLE;
@@ -53,18 +62,17 @@ string Game::GameLoop(){
         else if (IsMouseButtonPressed(MOUSE_BUTTON_BACK)) ballColor = BEIGE;
         
         BeginDrawing();
+            ClearBackground(LIME);
+                
+                DrawLine(GetScreenWidth() - 150, 0, GetScreenWidth() - 150, GetScreenHeight(), Fade(LIGHTGRAY, 0.6f));
+                DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f));
+                DrawLine(0, 125, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.6f));
+                DrawRectangle(0, 0, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.3f));
 
-            Rectangle rec = { ((float)GetScreenWidth() - width - 250)/2, (GetScreenHeight() - height)/2.0f, (float)width, (float)height };
+            rec = { recX[0], recY[0], (float)width, (float)height};
 
-            DrawLine(GetScreenWidth() - 150, 0, GetScreenWidth() - 150, GetScreenHeight(), Fade(LIGHTGRAY, 0.6f));
-            DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f));
-            DrawLine(0, 125, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.6f));
-            DrawRectangle(0, 0, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.3f));
-
-            
             DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
             
-            ClearBackground(GREEN); // 0 228, 48, 255
             DrawCircleV(mousePosition, 40, ballColor);
 
         EndDrawing();

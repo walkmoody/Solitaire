@@ -28,6 +28,9 @@ class Game{
         int cardTot = 52;
         int cardKey[52];
         Vector2 mousePosition = { -100.0f, -100.0f };
+        float recX[52];
+        float recY[52];
+        Rectangle rec;
 };
 
 // THINGS NEEDED
