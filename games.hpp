@@ -30,7 +30,14 @@ class Game{
         Vector2 mousePosition = { -100.0f, -100.0f };
         float recX[52];
         float recY[52];
+        float recXCopy;
+        float recYCopy;
         Rectangle rec;
+        float roundness = 0.2f;
+        float width = 100.0f;
+        float height = 150.0f;
+        float segments = 0.0f;
+
 };
 
 // THINGS NEEDED

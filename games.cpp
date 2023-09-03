@@ -6,6 +6,10 @@ using std::string;
 void Game::GamesInit(){
     Randomizer();
     looping = true;
+    recX[0] = 100;
+    recY[0] = 100;
+    recXCopy = recX[0];
+    recYCopy = recY[0];
 }
 
 void Game::Randomizer(){
@@ -29,14 +33,7 @@ void Game::Randomizer(){
 
 string Game::GameLoop(){
     
-    Color ballColor = DARKBLUE;
     
-    float roundness = 0.2f;
-    float width = 100.0f;
-    float height = 150.0f;
-    float segments = 0.0f;
-    recX[0] = 100;
-    recY[0] = 100;
 
     //DrawRectangleRec(rec, Fade(GOLD, 0.6f));
     //DrawRectangleRoundedLines(rec, roundness, (int)segments, lineThick, Fade(MAROON, 0.4f));
@@ -48,18 +45,16 @@ string Game::GameLoop(){
         mousePosition = GetMousePosition(); // Mouse tracker 
         float mouseX = mousePosition.x;
         float mouseY = mousePosition.y; 
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){ ballColor = MAROON;
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
             if (float(mouseX) > float(recX[0]) && float(mouseX) < float(recX[0]+ width) && float(mouseY) > float(recY[0]) && float(mouseY) < float(recY[0] + height)){
                 recX[0] = mouseX - width/2;
                 recY[0] = mouseY - height/2;
             }
+            else{
+                recX[0] = recXCopy;
+                recY[0] = recYCopy;
+            }
         }
-        else if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE)) ballColor = LIME;
-        else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) ballColor = DARKBLUE;
-        else if (IsMouseButtonPressed(MOUSE_BUTTON_SIDE)) ballColor = PURPLE;
-        else if (IsMouseButtonPressed(MOUSE_BUTTON_EXTRA)) ballColor = YELLOW;
-        else if (IsMouseButtonPressed(MOUSE_BUTTON_FORWARD)) ballColor = ORANGE;
-        else if (IsMouseButtonPressed(MOUSE_BUTTON_BACK)) ballColor = BEIGE;
         
         BeginDrawing();
             ClearBackground(LIME);
@@ -73,7 +68,6 @@ string Game::GameLoop(){
 
             DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
             
-            DrawCircleV(mousePosition, 40, ballColor);
 
         EndDrawing();
     }
