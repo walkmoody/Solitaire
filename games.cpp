@@ -32,13 +32,7 @@ void Game::Randomizer(){
 } 
 
 string Game::GameLoop(){
-    
-    
 
-    //DrawRectangleRec(rec, Fade(GOLD, 0.6f));
-    //DrawRectangleRoundedLines(rec, roundness, (int)segments, lineThick, Fade(MAROON, 0.4f));
-
-    
     while(looping){
         if(WindowShouldClose())
             return "quit";
