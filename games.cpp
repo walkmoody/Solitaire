@@ -7,7 +7,7 @@ void Game::GamesInit(){
     Randomizer();
     looping = true;
     recX[0] = 100;
-    recY[0] = 100;
+    recY[0] = 150;
     recXCopy = recX[0];
     recYCopy = recY[0];
 }
@@ -49,7 +49,6 @@ void Game::cardLinker(){
             string temp = std::to_string(cardKey[i] % 13 + 1);
             cardPull = cardPull + temp + "_of_";
         }
-
         if (cards[cardKey[i]] == "Diamond"){
             cardPull = cardPull + "diamonds.png";
         }
@@ -69,6 +68,10 @@ void Game::cardLinker(){
         cardTexture[i] = LoadTextureFromImage(card);
         UnloadImage(card);
     }
+    Image card = LoadImage("resources/cards/card_back.png");                             
+    ImageResize(&card, width, height);
+    cardBack = LoadTextureFromImage(card);
+    UnloadImage(card);
 }
 
 string Game::GameLoop(){
@@ -100,10 +103,8 @@ string Game::GameLoop(){
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f));
                 DrawLine(0, 125, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.6f));
                 DrawRectangle(0, 0, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.3f));
-
-            rec = { recX[0], recY[0], (float)width, (float)height};
-
-            DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
+                DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
+                DrawTexture(cardBack, 170, 150, WHITE);
             //DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
             
 

@@ -39,6 +39,7 @@ class Game{
         float height = 150.0f;
         float segments = 0.0f;
         Texture2D cardTexture[52];
+        Texture2D cardBack;
 
 
 };
