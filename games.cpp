@@ -29,7 +29,47 @@ void Game::Randomizer(){
         }
         std::cout << cardKey[i] << std::endl;
     }
+    cardLinker();
+
 } 
+
+void Game::cardLinker(){
+    for (int i = 0; i < cardTot; i++){
+        string cardPull = "resources/cards/";
+        if (cardKey[i] % 13 == 0){
+            cardPull = cardPull + "ace_of_";
+        }
+        else if (cardKey[i] % 13 == 10)
+            cardPull = cardPull + "jack_of_";
+        else if (cardKey[i] % 13 == 11)
+            cardPull = cardPull + "queen_of_";
+        else if (cardKey[i] % 13 == 12)
+            cardPull = cardPull + "king_of_";
+        else{
+            string temp = std::to_string(cardKey[i] % 13);
+            cardPull = cardPull + temp + "_of_";
+        }
+
+        if (cards[cardKey[i]] == "Diamond"){
+            cardPull = cardPull + "diamonds.png";
+        }
+        else if (cards[cardKey[i]] == "Club"){
+            cardPull = cardPull + "clubs.png";
+        }
+        else if (cards[cardKey[i]] == "Heart"){
+            cardPull = cardPull + "hearts.png";
+        }
+        else if (cards[cardKey[i]] == "Spade"){
+            cardPull = cardPull + "spades.png";
+        }
+
+        const char* cString = cardPull.c_str();
+        Image card = LoadImage(cString);                             
+        ImageResize(&card, width, height);
+        cardTexture[i] = LoadTextureFromImage(card);
+        UnloadImage(card);
+    }
+}
 
 string Game::GameLoop(){
 
@@ -60,7 +100,8 @@ string Game::GameLoop(){
 
             rec = { recX[0], recY[0], (float)width, (float)height};
 
-            DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
+            DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
+            //DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
             
 
         EndDrawing();
@@ -69,6 +110,8 @@ string Game::GameLoop(){
 }
 
 void Game::deconstuct(){
-
+    for (int i = 0; i < cardTot; i++){
+       UnloadTexture(cardTexture[i]);
+    }
 
 }
