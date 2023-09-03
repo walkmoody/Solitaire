@@ -50,7 +50,7 @@ string Game::GameLoop(){
                 recX[0] = mouseX - width/2;
                 recY[0] = mouseY - height/2;
             }
-            else{
+            else{ // Snaps card back
                 recX[0] = recXCopy;
                 recY[0] = recYCopy;
             }
