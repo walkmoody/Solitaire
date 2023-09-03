@@ -8,11 +8,15 @@ using std::string;
 
 int main(void){
 
+    Image image = LoadImage("resources\\icon.png"); 
+    
     InitWindow(screenWidth, screenHeight, "Solitaire");
+    SetWindowIcon(image); 
+    UnloadImage(image);
+
     SetTargetFPS(120);
-    Image icon = LoadImage("resources/icon.png");
-    SetWindowIcon(icon);
-    UnloadImage(icon);
+    
+    
 
     string screen = "splash";
     Menus displayScreen;
