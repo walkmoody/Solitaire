@@ -74,7 +74,46 @@ void Game::cardLinker(){
     cardBack = LoadTextureFromImage(card);
     UnloadImage(card);
 }
+/*
+How it should be printed
+1st row
+0 - 2
+2nd row 
+1 - 3
+3rd row 
+1 - 3
+4th row
+1 - 4
+5th row
+3 - 5
+6th row
+4 - 5
+7th row
+5 - 6
+1   2   3   4   5   6   7   
 
+*/
+void Game::cardPrint(){
+    DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
+    DrawTexture(cardBack, 170, 150, WHITE);           
+
+}
+
+void Game::cardGrab(){
+    mousePosition = GetMousePosition(); // Mouse tracker 
+    float mouseX = mousePosition.x;
+    float mouseY = mousePosition.y; 
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
+        if (float(mouseX) > float(recX[0]) && float(mouseX) < float(recX[0]+ width) && float(mouseY) > float(recY[0]) && float(mouseY) < float(recY[0] + height)){
+            recX[0] = mouseX - width/2;
+            recY[0] = mouseY - height/2;
+        }
+        else{ // Snaps card back
+            recX[0] = recXCopy;
+            recY[0] = recYCopy;
+        }
+    }
+}
 string Game::GameLoop(){
 
     while(looping){
@@ -83,19 +122,7 @@ string Game::GameLoop(){
         if(IsKeyPressed(KEY_P)){
             return "menu";
         }
-        mousePosition = GetMousePosition(); // Mouse tracker 
-        float mouseX = mousePosition.x;
-        float mouseY = mousePosition.y; 
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
-            if (float(mouseX) > float(recX[0]) && float(mouseX) < float(recX[0]+ width) && float(mouseY) > float(recY[0]) && float(mouseY) < float(recY[0] + height)){
-                recX[0] = mouseX - width/2;
-                recY[0] = mouseY - height/2;
-            }
-            else{ // Snaps card back
-                recX[0] = recXCopy;
-                recY[0] = recYCopy;
-            }
-        }
+        cardGrab();
         
         BeginDrawing();
             ClearBackground(LIME);
@@ -104,10 +131,7 @@ string Game::GameLoop(){
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f));
                 DrawLine(0, 125, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.6f));
                 DrawRectangle(0, 0, GetScreenWidth() - 150, 125, Fade(LIGHTGRAY, 0.3f));
-                DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
-                DrawTexture(cardBack, 170, 150, WHITE);
-            //DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
-            
+                
 
         EndDrawing();
     }

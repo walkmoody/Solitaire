@@ -11,6 +11,8 @@ class Game{
         void Randomizer(); // Called in init
         void deconstuct();
         void cardLinker();
+        void cardGrab();
+        void cardPrint();
     private:
         bool looping;
         map<int, string> cards{{0, "Diamond"}, {1, "Diamond"}, {2, "Diamond"}, {3,"Diamond"}, {4, "Diamond"}, {5, "Diamond"}, {6, "Diamond"}, {7, "Diamond"}, {8, "Diamond"},
