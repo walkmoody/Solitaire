@@ -7,10 +7,6 @@ void Game::GamesInit(){
     Randomizer();
     patternGen();
     looping = true;
-    recX[0] = 100;
-    recY[0] = 150;
-    recXCopy = recX[0];
-    recYCopy = recY[0];
     cardCoord();
 }
 
