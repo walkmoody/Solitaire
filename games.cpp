@@ -8,6 +8,7 @@ void Game::GamesInit(){
     patternGen();
     looping = true;
     cardCoord();
+    grab = false;
 }
 
 void Game::cardCoord(){
@@ -16,6 +17,7 @@ void Game::cardCoord(){
     for (int i = currTot; i < row1tot; i++){
         recX[i] = 25; 
         recY[i] = 200 + i * 25;
+        if(i != currTot + row1tot - 1) faceUp[i] = false; else faceUp[i] = true;
     }
     currTot = currTot + row1tot;
 
@@ -23,6 +25,7 @@ void Game::cardCoord(){
     for (int i = currTot; i < currTot + row2tot; i++){
         recX[i] = 150; 
         recY[i] = 200 + j * 25;
+        if(i != currTot + row2tot - 1) faceUp[i] = false; else faceUp[i] = true;
         j++;
     }
     currTot = currTot + row2tot;
@@ -31,6 +34,7 @@ void Game::cardCoord(){
     for (int i = currTot; i < currTot + row3tot; i++){
         recX[i] = 275; 
         recY[i] = 200 + j * 25;
+        if(i != currTot + row3tot - 1) faceUp[i] = false; else faceUp[i] = true;
         j++;
     }
     currTot = currTot + row3tot;
@@ -39,6 +43,7 @@ void Game::cardCoord(){
     for (int i = currTot; i < currTot + row4tot; i++){
         recX[i] = 400; 
         recY[i] = 200 + j * 25;
+        if(i != currTot + row4tot - 1) faceUp[i] = false; else faceUp[i] = true;
         j++;
     }
     currTot = currTot + row4tot;
@@ -47,6 +52,7 @@ void Game::cardCoord(){
     for (int i = currTot; i < currTot + row5tot; i++){
         recX[i] = 525; 
         recY[i] = 200 + j * 25;
+        if(i != currTot + row5tot - 1) faceUp[i] = false; else faceUp[i] = true;
         j++;
     }
     currTot = currTot + row5tot;
@@ -55,6 +61,7 @@ void Game::cardCoord(){
     for (int i = currTot; i < currTot + row6tot; i++){
         recX[i] = 650; 
         recY[i] = 200 + j * 25;
+        if(i != currTot + row6tot - 1) faceUp[i] = false; else faceUp[i] = true;
         j++;
     }
     currTot = currTot + row6tot;
@@ -63,6 +70,7 @@ void Game::cardCoord(){
     for (int i = currTot; i < currTot + row7tot; i++){
         recX[i] = 775; 
         recY[i] = 200 + j * 25;
+        if(i != currTot + row7tot - 1) faceUp[i] = false; else faceUp[i] = true;
         j++;
     }
     currTot = currTot + row7tot;
@@ -93,8 +101,9 @@ void Game::patternGen(){
     int cardNum = 0;
     int ranNum = rand() % 2;
     row1tot = ranNum;
-    for (int i = 0; i < ranNum; i++)
+    for (int i = 0; i < ranNum; i++){
         row1[i] = i;
+    }
     cardNum = row1tot;
 
     ranNum = rand() % 3;
@@ -142,7 +151,7 @@ void Game::patternGen(){
         ranNum = rand() % 6;
     row7tot = ranNum;
     for (int i = 0; i < ranNum; i++)
-        row6[i] = cardNum + i;
+        row7[i] = cardNum + i;
     cardNum = row7tot;
     
 }
@@ -213,12 +222,13 @@ void Game::cardLinker(){
 void Game::cardPrint(){
     
     for(int i = 0; i < currTot; i++){
-        DrawTexture(cardTexture[i], recX[i], recY[i], WHITE);
+        if(!faceUp[i])
+            DrawTexture(cardBack, recX[i], recY[i], WHITE);   
+        else if (faceUp[i] || (i != grabId && grab))  
+            DrawTexture(cardTexture[i], recX[i], recY[i], WHITE);
     }
-
-    //DrawTexture(cardTexture[0], recX[0], recY[0], WHITE);
-    //DrawTexture(cardBack, 170, 150, WHITE);           
-
+    if(grab)
+        DrawTexture(cardTexture[grabId], recX[grabId], recY[grabId], WHITE);
 }
 
 void Game::cardGrab(){
@@ -227,15 +237,15 @@ void Game::cardGrab(){
     float mouseY = mousePosition.y; 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
         for (int i = 0; i < currTot; i++)
-        if (float(mouseX) > float(recX[i]) && float(mouseX) < float(recX[i]+ width) && float(mouseY) > float(recY[i]) && float(mouseY) < float(recY[i] + height)){
-            recX[i] = mouseX - width/2;
-            recY[i] = mouseY - height/2;
+            if (!grab && faceUp[i] && float(mouseX) > float(recX[i]) && float(mouseX) < float(recX[i]+ width) && float(mouseY) > float(recY[i]) && float(mouseY) < float(recY[i] + height)){
+                grab = true;
+                grabId = i;
+            }
+        else if (grab) {
+            recX[grabId] = mouseX - width/2;
+            recY[grabId] = mouseY - height/2;
         }
-        else{ // Snaps card back
-            //recX[0] = recXCopy;
-            //recY[0] = recYCopy;
-        }
-    }
+    }else grab = false;
 }
 string Game::GameLoop(){
 

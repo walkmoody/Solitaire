@@ -44,6 +44,7 @@ class Game{
         float segments = 0.0f;
         Texture2D cardTexture[52];
         Texture2D cardBack;
+        bool faceUp[52];
         int row1[13];
         int row1tot;
         int row2[13];
@@ -59,6 +60,8 @@ class Game{
         int row7[13];
         int row7tot;
         int currTot;
+        bool grab = true;
+        int grabId;
 
 
 };
