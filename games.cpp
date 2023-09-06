@@ -221,14 +221,20 @@ void Game::cardLinker(){
 
 void Game::cardPrint(){
     
-    for(int i = 0; i < currTot; i++){
-        if(!faceUp[i])
+    for(int i = 0; i < currTot; i++){ // print it by the row instead of collumn
+        int temp;
+        temp = i;
+        if(!faceUp[temp])
             DrawTexture(cardBack, recX[i], recY[i], WHITE);   
-        else if (faceUp[i] || (i != grabId && grab))  
-            DrawTexture(cardTexture[i], recX[i], recY[i], WHITE);
+        else if (faceUp[temp] || (temp != grabId && grab))  
+            DrawTexture(cardTexture[temp], recX[temp], recY[temp], WHITE);
     }
     if(grab)
         DrawTexture(cardTexture[grabId], recX[grabId], recY[grabId], WHITE);
+    cardsLeft = cardTot - currTot;
+    for(int i = 0; i < cardsLeft; i++)
+        DrawTexture(cardBack, 10 + i*10, 10, WHITE); 
+
 }
 
 void Game::cardGrab(){
