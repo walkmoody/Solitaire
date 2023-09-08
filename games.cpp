@@ -232,9 +232,12 @@ void Game::cardPrint(){
     if(grab)
         DrawTexture(cardTexture[grabId], recX[grabId], recY[grabId], WHITE);
     cardsLeft = cardTot - currTot;
-    for(int i = 0; i < cardsLeft; i++)
-        DrawTexture(cardBack, 10 + i*10, 10, WHITE); 
-
+    for(int i = 0; i < cardsLeft; i++){
+        if (i == cardsLeft - 1)
+            DrawTexture(cardTexture[cardsLeft + cardTot - 1], 10 + i*10, 10, WHITE); 
+        else   
+            DrawTexture(cardBack, 10 + i*10, 10, WHITE); 
+    }
 }
 
 void Game::cardGrab(){

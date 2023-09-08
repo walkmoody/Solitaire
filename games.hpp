@@ -62,7 +62,7 @@ class Game{
         int currTot;
         bool grab = true;
         int grabId;
-        int cardLeft; // amount of cards left in the stack
+        int cardsLeft; // amount of cards left in the stack
 
 
 };
