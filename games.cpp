@@ -231,7 +231,7 @@ void Game::cardPrint(){
     }
     if(grab)
         DrawTexture(cardTexture[grabId], recX[grabId], recY[grabId], WHITE);
-    cardsLeft = cardTot - currTot;
+    cardsLeft = cardTot - currTot; // should this constantly be calculating?
     for(int i = 0; i < cardsLeft; i++){
         if (i == cardsLeft - 1)
             DrawTexture(cardTexture[cardsLeft + cardTot - 1], 10 + i*10, 10, WHITE); 
