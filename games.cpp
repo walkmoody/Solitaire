@@ -37,29 +37,10 @@ void Game::cardCoord(){
     for (int i = cardNum; i < cardTot; i++){
         cardsArr[i].row = 8;
         cardsArr[i].faceUp = false;
-        cardsArr[i].recX = 15 + (i - cardNum) * 10;
-        cardsArr[i].recY = 15;
+        cardsArr[i].recX = 10 + (i - cardNum) * 10;
+        cardsArr[i].recY = 10;
     }
 }
-/*
-How it should be printed
-1st row
-0 - 2
-2nd row 
-1 - 3
-3rd row 
-1 - 3
-4th row
-1 - 4
-5th row
-3 - 5
-6th row
-4 - 5
-7th row
-5 - 6
-1   2   3   4   5   6   7   
-
-*/
 
 void Game::patternGen(){
     cardNum = 0;
@@ -209,9 +190,9 @@ void Game::cardPrint(){
     cardsLeft = cardTot - cardNum; // should this constantly be calculating?
     for(int i = 0; i < cardsLeft; i++){
         if (i == cardsLeft - 1)
-            DrawTexture(cardsArr[cardsLeft + cardNum - 1].cardTexture, 10 + i*10, 10, WHITE); 
+            DrawTexture(cardsArr[cardsLeft + cardNum - 1].cardTexture, cardsArr[cardsLeft + cardNum - 1].recX, cardsArr[cardsLeft + cardNum - 1].recY, WHITE); 
         else   
-            DrawTexture(cardBack, 10 + i*10, 10, WHITE); 
+            DrawTexture(cardBack, cardsArr[cardNum + i].recX, cardsArr[cardNum + i].recY, WHITE); 
     }
 }
 
@@ -220,7 +201,7 @@ void Game::cardGrab(){
     float mouseX = mousePosition.x;
     float mouseY = mousePosition.y; 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
-        for (int i = 0; i < cardNum; i++)
+        for (int i = 0; i < cardTot; i++)
             if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].recX + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
                 grab = true;
                 grabId = i;
@@ -232,16 +213,13 @@ void Game::cardGrab(){
     }else grab = false;
 }
 string Game::GameLoop(){
-    std::cout << "test" << std::endl; // REMOVE
     while(looping){
         if(WindowShouldClose())
             return "quit";
         if(IsKeyPressed(KEY_P)){
             return "menu";
         }
-        std::cout << "test" << std::endl; // REMOVE
         cardGrab();
-        std::cout << "grab" << std::endl; // REMOVE
         BeginDrawing();
             ClearBackground(LIME);
                 
