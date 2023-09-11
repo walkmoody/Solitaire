@@ -46,9 +46,8 @@ class Game{
         Vector2 mousePosition = { -100.0f, -100.0f };
         float recX[52];
         float recY[52];
-        float recXCopy; // remove
-        float recYCopy;
-        Rectangle rec;
+        
+        //Rectangle rec;
         float roundness = 0.2f;
         float width = 100.0f;
         float height = 150.0f;
@@ -71,10 +70,11 @@ class Game{
         int row7[13];
         int row7tot;
         int currTot;
+        int cardNum;
         bool grab = true;
         int grabId;
         int cardsLeft; // amount of cards left in the stack
-        cardStruct cardsArr[52];
+        cardStruct cardsArr[53];
 
 };
 

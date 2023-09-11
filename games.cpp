@@ -5,77 +5,33 @@ using std::string;
 
 void Game::GamesInit(){
     Randomizer();
+    std::cout << "Pat" << std::endl;
     patternGen();
     looping = true;
+    std::cout << "Coord" << std::endl;
     cardCoord();
+    std::cout << "work" << std::endl;
     grab = false;
 }
 
 void Game::cardCoord(){
-    int j =0;
-    currTot = 0;
-    for (int i = currTot; i < row1tot; i++){
-        recX[i] = 25; 
-        recY[i] = 200 + i * 25;
-        if(i != currTot + row1tot - 1) faceUp[i] = false; else faceUp[i] = true;
+    for(int i = 0; i < cardNum; i++){
+        if(cardsArr[i].row == 1)
+            cardsArr[i].recX = 25; 
+        else if(cardsArr[i].row == 2)
+            cardsArr[i].recX = 150; 
+        else if(cardsArr[i].row == 3)
+            cardsArr[i].recX = 275; 
+        else if(cardsArr[i].row == 4)
+            cardsArr[i].recX = 400; 
+        else if(cardsArr[i].row == 5)
+            cardsArr[i].recX = 525; 
+        else if(cardsArr[i].row == 6)
+            cardsArr[i].recX = 650;     
+        else if(cardsArr[i].row == 6)
+            cardsArr[i].recX = 775;     
+        cardsArr[i].recY = 200 + cardsArr[i].collumn * 25
     }
-    currTot = currTot + row1tot;
-
-    j = 0;
-    for (int i = currTot; i < currTot + row2tot; i++){
-        recX[i] = 150; 
-        recY[i] = 200 + j * 25;
-        if(i != currTot + row2tot - 1) faceUp[i] = false; else faceUp[i] = true;
-        j++;
-    }
-    currTot = currTot + row2tot;
-
-    j = 0;
-    for (int i = currTot; i < currTot + row3tot; i++){
-        recX[i] = 275; 
-        recY[i] = 200 + j * 25;
-        if(i != currTot + row3tot - 1) faceUp[i] = false; else faceUp[i] = true;
-        j++;
-    }
-    currTot = currTot + row3tot;
-
-    j = 0;
-    for (int i = currTot; i < currTot + row4tot; i++){
-        recX[i] = 400; 
-        recY[i] = 200 + j * 25;
-        if(i != currTot + row4tot - 1) faceUp[i] = false; else faceUp[i] = true;
-        j++;
-    }
-    currTot = currTot + row4tot;
-
-    j = 0;
-    for (int i = currTot; i < currTot + row5tot; i++){
-        recX[i] = 525; 
-        recY[i] = 200 + j * 25;
-        if(i != currTot + row5tot - 1) faceUp[i] = false; else faceUp[i] = true;
-        j++;
-    }
-    currTot = currTot + row5tot;
-
-    j = 0;
-    for (int i = currTot; i < currTot + row6tot; i++){
-        recX[i] = 650; 
-        recY[i] = 200 + j * 25;
-        if(i != currTot + row6tot - 1) faceUp[i] = false; else faceUp[i] = true;
-        j++;
-    }
-    currTot = currTot + row6tot;
-
-    j = 0;
-    for (int i = currTot; i < currTot + row7tot; i++){
-        recX[i] = 775; 
-        recY[i] = 200 + j * 25;
-        if(i != currTot + row7tot - 1) faceUp[i] = false; else faceUp[i] = true;
-        j++;
-    }
-    currTot = currTot + row7tot;
-
-
 }
 /*
 How it should be printed
@@ -98,11 +54,16 @@ How it should be printed
 */
 
 void Game::patternGen(){
-    int cardNum = 0;
+    cardNum = 0;
     int ranNum = rand() % 2;
     row1tot = ranNum;
     for (int i = 0; i < ranNum; i++){
+        cardsArr[i + cardNum].row = 1;
+        cardsArr[i + cardNum].collumn = i;
         row1[i] = i;
+        if(i == ranNum - 1)
+            cardsArr[i + cardNum].faceUp = true;
+        else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum = row1tot;
 
@@ -110,49 +71,85 @@ void Game::patternGen(){
     while(ranNum < 1 || ranNum > 3)
         ranNum = rand() % 3;
     row2tot = ranNum;
-    for (int i = 0; i < ranNum; i++)
+    for (int i = 0; i < ranNum; i++){
         row2[i] = cardNum + i;
+        cardsArr[i + cardNum].row = 2;
+        cardsArr[i + cardNum].collumn = i;
+        if(i == ranNum - 1)
+            cardsArr[i + cardNum].faceUp = true;
+        else cardsArr[i + cardNum].faceUp = false;
+    }
     cardNum += row2tot;
 
     ranNum = rand() % 3;
     while(ranNum < 1 || ranNum > 3)
         ranNum = rand() % 3;
     row3tot = ranNum;
-    for (int i = 0; i < ranNum; i++)
+    for (int i = 0; i < ranNum; i++){
         row3[i] = cardNum + i;
-    cardNum = row3tot;
+        cardsArr[i + cardNum].row = 3;
+        cardsArr[i + cardNum].collumn = i;
+        if(i == ranNum - 1)
+            cardsArr[i + cardNum].faceUp = true;
+        else cardsArr[i + cardNum].faceUp = false;
+    }
+    cardNum += row3tot;
 
     ranNum = rand() % 4;
     while(ranNum < 1 || ranNum > 4)
         ranNum = rand() % 4;
     row4tot = ranNum;
-    for (int i = 0; i < ranNum; i++)
+    for (int i = 0; i < ranNum; i++){
         row4[i] = cardNum + i;
-    cardNum = row4tot;
+        cardsArr[i + cardNum].row = 4;
+        cardsArr[i + cardNum].collumn = i;
+        if(i == ranNum - 1)
+            cardsArr[i + cardNum].faceUp = true;
+        else cardsArr[i + cardNum].faceUp = false;
+    }
+    cardNum += row4tot;
 
     ranNum = rand() % 5;
     while(ranNum < 3 || ranNum > 5)
         ranNum = rand() % 5;
     row5tot = ranNum;
-    for (int i = 0; i < ranNum; i++)
+    for (int i = 0; i < ranNum; i++){
         row5[i] = cardNum + i;
-    cardNum = row5tot;
+        cardsArr[i + cardNum].row = 5;
+        cardsArr[i + cardNum].collumn = i;
+        if(i == ranNum - 1)
+            cardsArr[i + cardNum].faceUp = true;
+        else cardsArr[i + cardNum].faceUp = false;
+    }
+    cardNum += row5tot;
 
     ranNum = rand() % 5;
     while(ranNum < 4 || ranNum > 5)
         ranNum = rand() % 5;
     row6tot = ranNum;
-    for (int i = 0; i < ranNum; i++)
+    for (int i = 0; i < ranNum; i++){
         row6[i] = cardNum + i;
-    cardNum = row6tot;
+        cardsArr[i + cardNum].row = 6;
+        cardsArr[i + cardNum].collumn = i;
+        if(i == ranNum - 1)
+            cardsArr[i + cardNum].faceUp = true;
+        else cardsArr[i + cardNum].faceUp = false;
+    }
+    cardNum += row6tot;
 
     ranNum = rand() % 6;
     while(ranNum < 5 || ranNum > 6)
         ranNum = rand() % 6;
     row7tot = ranNum;
-    for (int i = 0; i < ranNum; i++)
+    for (int i = 0; i < ranNum; i++){
         row7[i] = cardNum + i;
-    cardNum = row7tot;
+        cardsArr[i + cardNum].row = 7;
+        cardsArr[i + cardNum].collumn = i;
+        if(i == ranNum - 1)
+            cardsArr[i + cardNum].faceUp = true;
+        else cardsArr[i + cardNum].faceUp = false;
+    }
+    cardNum += row7tot;
     
 }
 
@@ -210,7 +207,7 @@ void Game::cardLinker(){
         const char* cString = cardPull.c_str();
         Image card = LoadImage(cString);                             
         ImageResize(&card, width, height);
-        cardTexture[i] = LoadTextureFromImage(card);
+        cardsArr[i].cardTexture = LoadTextureFromImage(card);
         UnloadImage(card);
     }
     Image card = LoadImage("resources/cards/card_back.png");                             
@@ -222,19 +219,17 @@ void Game::cardLinker(){
 void Game::cardPrint(){
     
     for(int i = 0; i < currTot; i++){ // print it by the row instead of collumn
-        int temp;
-        temp = i;
-        if(!faceUp[temp])
-            DrawTexture(cardBack, recX[i], recY[i], WHITE);   
-        else if (faceUp[temp] || (temp != grabId && grab))  
-            DrawTexture(cardTexture[temp], recX[temp], recY[temp], WHITE);
+        if(!cardsArr[i].faceUp)
+            DrawTexture(cardBack, cardsArr[i].recX, recY[i], WHITE);   
+        else if (cardsArr[i].faceUp || (i != grabId && grab))  
+            DrawTexture(cardsArr[i].cardTexture, cardsArr[i].recX, cardsArr[i].recY, WHITE);
     }
     if(grab)
-        DrawTexture(cardTexture[grabId], recX[grabId], recY[grabId], WHITE);
+        DrawTexture(cardsArr[grabId].cardTexture, cardsArr[grabId].recX, cardsArr[grabId].recY, WHITE);
     cardsLeft = cardTot - currTot; // should this constantly be calculating?
     for(int i = 0; i < cardsLeft; i++){
         if (i == cardsLeft - 1)
-            DrawTexture(cardTexture[cardsLeft + cardTot - 1], 10 + i*10, 10, WHITE); 
+            DrawTexture(cardsArr[cardsLeft + cardTot - 1].cardTexture, 10 + i*10, 10, WHITE); 
         else   
             DrawTexture(cardBack, 10 + i*10, 10, WHITE); 
     }
@@ -246,18 +241,18 @@ void Game::cardGrab(){
     float mouseY = mousePosition.y; 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
         for (int i = 0; i < currTot; i++)
-            if (!grab && faceUp[i] && float(mouseX) > float(recX[i]) && float(mouseX) < float(recX[i]+ width) && float(mouseY) > float(recY[i]) && float(mouseY) < float(recY[i] + height)){
+            if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].   + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
                 grab = true;
                 grabId = i;
             }
         else if (grab) {
-            recX[grabId] = mouseX - width/2;
-            recY[grabId] = mouseY - height/2;
+            cardsArr[grabId].recX = mouseX - width/2;
+            cardsArr[grabId].recY = mouseY - height/2;
         }
     }else grab = false;
 }
 string Game::GameLoop(){
-
+    std::cout << "test" << endl; // REMOVE
     while(looping){
         if(WindowShouldClose())
             return "quit";
@@ -282,7 +277,7 @@ string Game::GameLoop(){
 
 void Game::deconstuct(){
     for (int i = 0; i < cardTot; i++){
-       UnloadTexture(cardTexture[i]);
+       UnloadTexture(cardsArr[i].cardTexture);
     }
     UnloadTexture(cardBack);
 
