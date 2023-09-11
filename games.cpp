@@ -161,7 +161,7 @@ void Game::Randomizer(){
     for(int i = 0; i < cardTot; i++){ // 52 = amount of cards
         bool reset = true;
         if (i == 0)
-            cardKey[i] = rand() % cardTot;
+            cardsArr[i].num = rand() % cardTot;
         else{ while(reset){
             reset = false;
             num = rand() % cardTot;
@@ -169,9 +169,9 @@ void Game::Randomizer(){
                 if (num == cardKey[j])
                     reset = true;
                 }}
-            cardKey[i] = num;
+            cardsArr[i].num = num;
         }
-        std::cout << cardKey[i] << std::endl;
+        std::cout << cardsArr[i].num << std::endl;
     }
     cardLinker();
 
@@ -180,30 +180,30 @@ void Game::Randomizer(){
 void Game::cardLinker(){
     for (int i = 0; i < cardTot; i++){
         string cardPull = "resources/cards/";
-        if (cardKey[i] % 13 == 0){
+        if (cardsArr[i].num % 13 == 0){
             cardPull = cardPull + "ace_of_";
         }
-        else if (cardKey[i] % 13 == 10)
+        else if (cardsArr[i].num % 13 == 10)
             cardPull = cardPull + "jack_of_";
-        else if (cardKey[i] % 13 == 11)
+        else if (cardsArr[i].num % 13 == 11)
             cardPull = cardPull + "queen_of_";
-        else if (cardKey[i] % 13 == 12)
+        else if (cardsArr[i].num % 13 == 12)
             cardPull = cardPull + "king_of_";
         else{
-            string temp = std::to_string(cardKey[i] % 13 + 1);
+            string temp = std::to_string(cardsArr[i].num % 13 + 1);
             cardPull = cardPull + temp + "_of_";
         }
 
-        if (cards[cardKey[i]] == "Diamond"){
+        if (cards[cardsArr[i].num] == "Diamond"){
             cardPull = cardPull + "diamonds.png";
         }
-        else if (cards[cardKey[i]] == "Club"){
+        else if (cards[cardsArr[i].num] == "Club"){
             cardPull = cardPull + "clubs.png";
         }
-        else if (cards[cardKey[i]] == "Heart"){
+        else if (cards[cardsArr[i].num] == "Heart"){
             cardPull = cardPull + "hearts.png";
         }
-        else if (cards[cardKey[i]] == "Spade"){
+        else if (cards[cardsArr[i].num] == "Spade"){
             cardPull = cardPull + "spades.png";
         }
 
