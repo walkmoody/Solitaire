@@ -226,18 +226,18 @@ void Game::cardLinker(){
 
 void Game::cardPrint(){
     
-    for(int i = 0; i < currTot; i++){ // print it by the row instead of collumn
-        if(!cardsArr[i].faceUp)
-            DrawTexture(cardBack, cardsArr[i].recX, recY[i], WHITE);   
-        else if (cardsArr[i].faceUp || (i != grabId && grab))  
+    for(int i = 0; i < cardNum; i++){ // print it by the row instead of collumn
+        if(cardsArr[i].faceUp == false)
+            DrawTexture(cardBack, cardsArr[i].recX, cardsArr[i].recY, WHITE);   
+        else if (cardsArr[i].faceUp)  
             DrawTexture(cardsArr[i].cardTexture, cardsArr[i].recX, cardsArr[i].recY, WHITE);
     }
     if(grab)
         DrawTexture(cardsArr[grabId].cardTexture, cardsArr[grabId].recX, cardsArr[grabId].recY, WHITE);
-    cardsLeft = cardTot - currTot; // should this constantly be calculating?
+    cardsLeft = cardTot - cardNum; // should this constantly be calculating?
     for(int i = 0; i < cardsLeft; i++){
         if (i == cardsLeft - 1)
-            DrawTexture(cardsArr[cardsLeft + cardTot - 1].cardTexture, 10 + i*10, 10, WHITE); 
+            DrawTexture(cardsArr[cardsLeft + cardNum - 1].cardTexture, 10 + i*10, 10, WHITE); 
         else   
             DrawTexture(cardBack, 10 + i*10, 10, WHITE); 
     }
@@ -248,7 +248,7 @@ void Game::cardGrab(){
     float mouseX = mousePosition.x;
     float mouseY = mousePosition.y; 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
-        for (int i = 0; i < currTot; i++)
+        for (int i = 0; i < cardNum; i++)
             if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].recX + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
                 grab = true;
                 grabId = i;
@@ -267,8 +267,9 @@ string Game::GameLoop(){
         if(IsKeyPressed(KEY_P)){
             return "menu";
         }
+        std::cout << "test" << std::endl; // REMOVE
         cardGrab();
-        
+        std::cout << "grab" << std::endl; // REMOVE
         BeginDrawing();
             ClearBackground(LIME);
                 
@@ -276,7 +277,9 @@ string Game::GameLoop(){
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f)); // bar on right side
                 DrawLine(0, 180, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.6f));
                 DrawRectangle(0, 0, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.3f));
+                std::cout << "tt" << std::endl; // REMOVE
                 cardPrint();
+                std::cout << "print" << std::endl; // REMOVE
 
         EndDrawing();
     }

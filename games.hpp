@@ -74,7 +74,7 @@ class Game{
         int grabId;
         int cardsLeft;
         cardStruct cardsArr[53];
-
+    // MASSIVE MORY LEAK IN PROGRAM 
 };
 
 // THINGS NEEDED
