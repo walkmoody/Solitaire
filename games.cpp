@@ -5,18 +5,13 @@ using std::string;
 
 void Game::GamesInit(){
     Randomizer();
-    std::cout << "Pat" << std::endl;
     patternGen();
     looping = true;
-    std::cout << "Coord" << std::endl;
-    std::cout << cardNum << std::endl;
     cardCoord();
-    std::cout << "work" << std::endl;
     grab = false;
 }
 
 void Game::cardCoord(){
-    std::cout << cardNum << std::endl;
     for(int i = 0; i < cardNum; i++){
         if(cardsArr[i].row == 1)
             cardsArr[i].recX = 25; 
