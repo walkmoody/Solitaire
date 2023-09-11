@@ -17,6 +17,15 @@ class Game{
         void cardCoord();
     private:
         bool looping;
+        struct cardStruct{
+            int num;
+            int row;
+            bool faceUp;
+            string suit;
+            Texture2D cardTexture;
+            float recX;
+            float recY;
+        };
         map<int, string> cards{{0, "Diamond"}, {1, "Diamond"}, {2, "Diamond"}, {3,"Diamond"}, {4, "Diamond"}, {5, "Diamond"}, {6, "Diamond"}, {7, "Diamond"}, {8, "Diamond"},
         {9, "Diamond"}, {10, "Diamond"}, {11, "Diamond"},{12, "Diamond"}, {13, "Club"}, {14, "Club"}, {15, "Club"}, {16, "Club"}, {17, "Club"}, {18, "Club"}, {19, "Club"},
         {20, "Club"}, {21, "Club"}, {22, "Club"}, {23, "Club"}, {24, "Club"}, {25, "Club"}, {26, "Heart"}, {27, "Heart"}, {28, "Heart"}, {29, "Heart"}, {30, "Heart"}, {31, "Heart"},
