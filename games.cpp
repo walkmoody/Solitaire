@@ -9,12 +9,14 @@ void Game::GamesInit(){
     patternGen();
     looping = true;
     std::cout << "Coord" << std::endl;
+    std::cout << cardNum << std::endl;
     cardCoord();
     std::cout << "work" << std::endl;
     grab = false;
 }
 
 void Game::cardCoord(){
+    std::cout << cardNum << std::endl;
     for(int i = 0; i < cardNum; i++){
         if(cardsArr[i].row == 1)
             cardsArr[i].recX = 25; 
@@ -28,9 +30,15 @@ void Game::cardCoord(){
             cardsArr[i].recX = 525; 
         else if(cardsArr[i].row == 6)
             cardsArr[i].recX = 650;     
-        else if(cardsArr[i].row == 6)
+        else if(cardsArr[i].row == 7)
             cardsArr[i].recX = 775;     
-        cardsArr[i].recY = 200 + cardsArr[i].collumn * 25
+        cardsArr[i].recY = 200 + cardsArr[i].collumn * 25;
+    }
+    for (int i = cardNum; i < cardTot; i++){
+        cardsArr[i].row = 8;
+        cardsArr[i].faceUp = false;
+        cardsArr[i].recX = 15 + (i - cardNum) * 10;
+        cardsArr[i].recY = 15;
     }
 }
 /*
@@ -241,7 +249,7 @@ void Game::cardGrab(){
     float mouseY = mousePosition.y; 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
         for (int i = 0; i < currTot; i++)
-            if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].   + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
+            if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].recX + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
                 grab = true;
                 grabId = i;
             }
@@ -252,7 +260,7 @@ void Game::cardGrab(){
     }else grab = false;
 }
 string Game::GameLoop(){
-    std::cout << "test" << endl; // REMOVE
+    std::cout << "test" << std::endl; // REMOVE
     while(looping){
         if(WindowShouldClose())
             return "quit";

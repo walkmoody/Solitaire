@@ -54,7 +54,6 @@ class Game{
         float segments = 0.0f;
         Texture2D cardTexture[52];
         Texture2D cardBack;
-        bool faceUp[52];
         int row1[13];
         int row1tot;
         int row2[13];
@@ -73,7 +72,7 @@ class Game{
         int cardNum;
         bool grab = true;
         int grabId;
-        int cardsLeft; // amount of cards left in the stack
+        int cardsLeft;
         cardStruct cardsArr[53];
 
 };
