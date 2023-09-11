@@ -64,100 +64,72 @@ How it should be printed
 void Game::patternGen(){
     cardNum = 0;
     int ranNum = rand() % 2;
-    row1tot = ranNum;
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 1;
         cardsArr[i + cardNum].collumn = i;
-        row1[i] = i;
-        if(i == ranNum - 1)
-            cardsArr[i + cardNum].faceUp = true;
-        else cardsArr[i + cardNum].faceUp = false;
+        if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
-    cardNum = row1tot;
+    cardNum = ranNum;
 
     ranNum = rand() % 3;
     while(ranNum < 1 || ranNum > 3)
         ranNum = rand() % 3;
-    row2tot = ranNum;
     for (int i = 0; i < ranNum; i++){
-        row2[i] = cardNum + i;
         cardsArr[i + cardNum].row = 2;
         cardsArr[i + cardNum].collumn = i;
-        if(i == ranNum - 1)
-            cardsArr[i + cardNum].faceUp = true;
-        else cardsArr[i + cardNum].faceUp = false;
+        if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
-    cardNum += row2tot;
+    cardNum += ranNum;
 
     ranNum = rand() % 3;
     while(ranNum < 1 || ranNum > 3)
         ranNum = rand() % 3;
-    row3tot = ranNum;
     for (int i = 0; i < ranNum; i++){
-        row3[i] = cardNum + i;
         cardsArr[i + cardNum].row = 3;
         cardsArr[i + cardNum].collumn = i;
-        if(i == ranNum - 1)
-            cardsArr[i + cardNum].faceUp = true;
-        else cardsArr[i + cardNum].faceUp = false;
+        if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
-    cardNum += row3tot;
+    cardNum += ranNum;
 
     ranNum = rand() % 4;
     while(ranNum < 1 || ranNum > 4)
         ranNum = rand() % 4;
-    row4tot = ranNum;
     for (int i = 0; i < ranNum; i++){
-        row4[i] = cardNum + i;
         cardsArr[i + cardNum].row = 4;
         cardsArr[i + cardNum].collumn = i;
-        if(i == ranNum - 1)
-            cardsArr[i + cardNum].faceUp = true;
-        else cardsArr[i + cardNum].faceUp = false;
+        if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
-    cardNum += row4tot;
+    cardNum += ranNum;
 
     ranNum = rand() % 5;
     while(ranNum < 3 || ranNum > 5)
         ranNum = rand() % 5;
-    row5tot = ranNum;
     for (int i = 0; i < ranNum; i++){
-        row5[i] = cardNum + i;
         cardsArr[i + cardNum].row = 5;
         cardsArr[i + cardNum].collumn = i;
-        if(i == ranNum - 1)
-            cardsArr[i + cardNum].faceUp = true;
-        else cardsArr[i + cardNum].faceUp = false;
+        if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
-    cardNum += row5tot;
+    cardNum += ranNum;
 
     ranNum = rand() % 5;
     while(ranNum < 4 || ranNum > 5)
         ranNum = rand() % 5;
-    row6tot = ranNum;
     for (int i = 0; i < ranNum; i++){
-        row6[i] = cardNum + i;
         cardsArr[i + cardNum].row = 6;
         cardsArr[i + cardNum].collumn = i;
-        if(i == ranNum - 1)
-            cardsArr[i + cardNum].faceUp = true;
-        else cardsArr[i + cardNum].faceUp = false;
+        if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
-    cardNum += row6tot;
+    cardNum += ranNum;
 
     ranNum = rand() % 6;
     while(ranNum < 5 || ranNum > 6)
         ranNum = rand() % 6;
-    row7tot = ranNum;
     for (int i = 0; i < ranNum; i++){
-        row7[i] = cardNum + i;
         cardsArr[i + cardNum].row = 7;
         cardsArr[i + cardNum].collumn = i;
-        if(i == ranNum - 1)
-            cardsArr[i + cardNum].faceUp = true;
-        else cardsArr[i + cardNum].faceUp = false;
+        if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
-    cardNum += row7tot;
+    cardNum += ranNum;
     
 }
 
@@ -171,7 +143,7 @@ void Game::Randomizer(){
             reset = false;
             num = rand() % cardTot;
             for(int j = 0; j < i; j++){
-                if (num == cardKey[j])
+                if (num == cardsArr[i].num)
                     reset = true;
                 }}
             cardsArr[i].num = num;
@@ -199,16 +171,16 @@ void Game::cardLinker(){
             cardPull = cardPull + temp + "_of_";
         }
 
-        if (cards[cardsArr[i].num] == "Diamond"){
+        if (cardsArr[i].num % 4 == 0){
             cardPull = cardPull + "diamonds.png";
         }
-        else if (cards[cardsArr[i].num] == "Club"){
+        else if (cardsArr[i].num % 4 == 1){
             cardPull = cardPull + "clubs.png";
         }
-        else if (cards[cardsArr[i].num] == "Heart"){
+        else if (cardsArr[i].num % 4 == 2){
             cardPull = cardPull + "hearts.png";
         }
-        else if (cards[cardsArr[i].num] == "Spade"){
+        else if (cardsArr[i].num % 4 == 3){
             cardPull = cardPull + "spades.png";
         }
 
