@@ -135,9 +135,8 @@ void Game::Randomizer(){
 void Game::cardLinker(){
     for (int i = 0; i < cardTot; i++){
         string cardPull = "resources/cards/";
-        if (cardsArr[i].num % 13 == 0){
+        if (cardsArr[i].num % 13 == 0)
             cardPull = cardPull + "ace_of_";
-        }
         else if (cardsArr[i].num % 13 == 10)
             cardPull = cardPull + "jack_of_";
         else if (cardsArr[i].num % 13 == 11)
@@ -149,18 +148,14 @@ void Game::cardLinker(){
             cardPull = cardPull + temp + "_of_";
         }
 
-        if (cardsArr[i].num < 13){ // FIX ME FIX ME
+        if (cardsArr[i].num < 13) // FIX ME FIX ME
             cardPull = cardPull + "diamonds.png";
-        }
-        else if (cardsArr[i].num < 26){
+        else if (cardsArr[i].num < 26) // 13 + 13 = 26
             cardPull = cardPull + "clubs.png";
-        }
-        else if (cardsArr[i].num < 39){
+        else if (cardsArr[i].num < 39) // 26 + 13 = 39
             cardPull = cardPull + "hearts.png";
-        }
-        else if (cardsArr[i].num < 52){
+        else if (cardsArr[i].num < 52) // 39 + 13 = 52
             cardPull = cardPull + "spades.png";
-        }
 
         const char* cString = cardPull.c_str();
         Image card = LoadImage(cString);                             
