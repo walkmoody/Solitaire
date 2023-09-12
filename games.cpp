@@ -35,6 +35,7 @@ void Game::cardCoord(){
         cardsArr[i].recX = 10 + (i - cardNum) * 10;
         cardsArr[i].recY = 10;
     }
+    cardsArr[cardTot - 1].faceUp = true;
 }
 
 void Game::patternGen(){
@@ -124,7 +125,6 @@ void Game::Randomizer(){
                 }}
             cardsArr[i].num = num;
         }
-        std::cout << cardsArr[i].num << std::endl;
     }
     cardLinker();
 
@@ -184,8 +184,8 @@ void Game::cardPrint(){
         DrawTexture(cardsArr[grabId].cardTexture, cardsArr[grabId].recX, cardsArr[grabId].recY, WHITE);
     cardsLeft = cardTot - cardNum; // should this constantly be calculating?
     for(int i = 0; i < cardsLeft; i++){
-        if (i == cardsLeft - 1)
-            DrawTexture(cardsArr[cardsLeft + cardNum - 1].cardTexture, cardsArr[cardsLeft + cardNum - 1].recX, cardsArr[cardsLeft + cardNum - 1].recY, WHITE); 
+        if (cardsArr[cardNum + i].faceUp)  
+            DrawTexture(cardsArr[cardNum + i].cardTexture, cardsArr[cardNum + i].recX, cardsArr[cardNum + i].recY, WHITE); 
         else   
             DrawTexture(cardBack, cardsArr[cardNum + i].recX, cardsArr[cardNum + i].recY, WHITE); 
     }
@@ -206,6 +206,8 @@ void Game::cardGrab(){
             cardsArr[grabId].recY = mouseY - height/2;
         }
     }else grab = false;
+
+    // if grab is false make sure every card is in correct location (snap back time)
 }
 string Game::GameLoop(){
     while(looping){
@@ -222,9 +224,7 @@ string Game::GameLoop(){
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f)); // bar on right side
                 DrawLine(0, 180, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.6f));
                 DrawRectangle(0, 0, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.3f));
-                std::cout << "tt" << std::endl; // REMOVE
                 cardPrint();
-                std::cout << "print" << std::endl; // REMOVE
 
         EndDrawing();
     }
