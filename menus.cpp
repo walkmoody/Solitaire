@@ -15,7 +15,7 @@ string Menus::splash(){ // Slooping
     ImageResize(&image, 300, 300);
     Texture2D texture = LoadTextureFromImage(image);
     UnloadImage(image);
-    while (splashCount < 90){
+    while (splashCount < 150){
 
         BeginDrawing();
 
