@@ -133,6 +133,7 @@ void Game::Randomizer(){
 } 
 
 void Game::cardLinker(){
+    string temp[52];
     for (int i = 0; i < cardTot; i++){
         string cardPull = "resources/cards/";
         if (cardsArr[i].num % 13 == 0)
@@ -162,11 +163,21 @@ void Game::cardLinker(){
         ImageResize(&card, width, height);
         cardsArr[i].cardTexture = LoadTextureFromImage(card);
         UnloadImage(card);
+        temp[i] = cardPull;
+        
     }
     Image card = LoadImage("resources/cards/card_back.png");                             
     ImageResize(&card, width, height);
     cardBack = LoadTextureFromImage(card);
     UnloadImage(card);
+    for (int i = 0; i < cardTot; i++)
+        for(int j = i + 1; j < cardTot; j++){
+            if (temp[i] == temp[j]){
+                std::cout << temp[i] << " " << i << std::endl;
+                std::cout << temp[j] << " " << j << std::endl;
+            }
+        }
+        
 }
 
 void Game::cardPrint(){
