@@ -43,10 +43,14 @@ string Menus::mainMenu(){
     int count = 0;
     int count2 = 0;
     while(!WindowShouldClose()){
-        if(IsKeyDown(KEY_SPACE))
+        if(IsKeyDown(KEY_SPACE)){
+            UnloadTexture(texture);
             return "game";
-        if(IsKeyDown(KEY_I))
+        }
+        if(IsKeyDown(KEY_I)){
+            UnloadTexture(texture);
             return "instructions";
+        }
         BeginDrawing();
 
             ClearBackground(GREEN);
