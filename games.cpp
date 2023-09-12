@@ -9,6 +9,7 @@ void Game::GamesInit(){
     looping = true;
     cardCoord();
     grab = false;
+    grabId = 0;
 }
 
 void Game::cardCoord(){
@@ -34,6 +35,7 @@ void Game::cardCoord(){
         cardsArr[i].faceUp = false;
         cardsArr[i].recX = 10 + (i - cardNum) * 10;
         cardsArr[i].recY = 10;
+        cardsArr[i].collumn = i - cardNum;
     }
     cardsArr[cardTot - 1].faceUp = true;
 }
@@ -147,16 +149,16 @@ void Game::cardLinker(){
             cardPull = cardPull + temp + "_of_";
         }
 
-        if (cardsArr[i].num % 4 == 0){
+        if (cardsArr[i].num < 13){ // FIX ME FIX ME
             cardPull = cardPull + "diamonds.png";
         }
-        else if (cardsArr[i].num % 4 == 1){
+        else if (cardsArr[i].num < 26){
             cardPull = cardPull + "clubs.png";
         }
-        else if (cardsArr[i].num % 4 == 2){
+        else if (cardsArr[i].num < 39){
             cardPull = cardPull + "hearts.png";
         }
-        else if (cardsArr[i].num % 4 == 3){
+        else if (cardsArr[i].num < 52){
             cardPull = cardPull + "spades.png";
         }
 
@@ -190,6 +192,31 @@ void Game::cardPrint(){
             DrawTexture(cardBack, cardsArr[cardNum + i].recX, cardsArr[cardNum + i].recY, WHITE); 
     }
 }
+void Game::snapBack(){
+        if(cardsArr[grabId].row == 1)
+            cardsArr[grabId].recX = 25; 
+        else if(cardsArr[grabId].row == 2)
+            cardsArr[grabId].recX = 150; 
+        else if(cardsArr[grabId].row == 3)
+            cardsArr[grabId].recX = 275; 
+        else if(cardsArr[grabId].row == 4)
+            cardsArr[grabId].recX = 400; 
+        else if(cardsArr[grabId].row == 5)
+            cardsArr[grabId].recX = 525; 
+        else if(cardsArr[grabId].row == 6)
+            cardsArr[grabId].recX = 650;     
+        else if(cardsArr[grabId].row == 7)
+            cardsArr[grabId].recX = 775; 
+        else if(cardsArr[grabId].row == 8)
+             cardsArr[grabId].recX = 10 + (cardsArr[grabId].collumn) * 10;
+        if(cardsArr[grabId].row != 8)    
+            cardsArr[grabId].recY = 200 + cardsArr[grabId].collumn * 25;
+        else 
+            cardsArr[grabId].recY = 10;
+
+    }
+
+
 
 void Game::cardGrab(){
     mousePosition = GetMousePosition(); // Mouse tracker 
@@ -206,9 +233,13 @@ void Game::cardGrab(){
             cardsArr[grabId].recY = mouseY - height/2;
         }
     }else grab = false;
+    if(!grab)
+        snapBack();
+
 
     // if grab is false make sure every card is in correct location (snap back time)
 }
+
 string Game::GameLoop(){
     while(looping){
         if(WindowShouldClose())

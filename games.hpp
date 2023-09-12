@@ -3,6 +3,7 @@
 #include "include/raylib.h"
 
 using std::string, std::map;
+
 struct cardStruct{
             int num;
             int row;
@@ -25,6 +26,7 @@ class Game{
         void cardPrint();
         void patternGen();
         void cardCoord();
+        void snapBack();
     private:
 
         bool looping;
