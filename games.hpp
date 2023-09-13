@@ -29,6 +29,7 @@ class Game{
         void cardCoord();
         void snapBack();
         void matchCheck();
+        void removeRow(int, int);
     private:
 
         bool looping;

@@ -226,13 +226,38 @@ void Game::snapBack(){
         else 
             cardsArr[grabId].recY = 10;
     }
+void Game::removeRow(int r1, int r2){
+    if(r1 == 1) row1--;
+    if(r1 == 2) row2--;
+    if(r1 == 3) row3--;
+    if(r1 == 4) row4--;
+    if(r1 == 5) row5--;
+    if(r1 == 6) row6--;
+    if(r1 == 7) row7--;
+    if(r1 == 8) row8--;
+
+    if(r2 == 1) row1++;
+    if(r2 == 2) row2++;
+    if(r2 == 3) row3++;
+    if(r2 == 4) row4++;
+    if(r2 == 5) row5++;
+    if(r2 == 6) row6++;
+    if(r2 == 7) row7++;
+
+}
 
 void Game::matchCheck(){
     for (int i = 0; i < cardTot; i++){
         if(cardsArr[i].faceUp && grabId != i){
             if((cardsArr[grabId].recX > cardsArr[i].recX - 15 && cardsArr[grabId].recX < cardsArr[i].recX + 15) &&
-            (cardsArr[grabId].recY > cardsArr[i].recY - 30 && cardsArr[grabId].recY < cardsArr[i].recY + 30))
-                std::cout << "True" << std::endl;
+            (cardsArr[grabId].recY > cardsArr[i].recY - 30 && cardsArr[grabId].recY < cardsArr[i].recY + 50))
+                if(cardsArr[grabId].num % 13 == cardsArr[i].num % 13 - 1 && cardsArr[grabId].color != cardsArr[i].color
+                && !(cardsArr[i].row > 7 )){
+                    removeRow(cardsArr[grabId].row, cardsArr[i].row);
+                    cardsArr[grabId].row = cardsArr[i].row;
+                    cardsArr[grabId].collumn = cardsArr[i].collumn + 1; 
+                    
+                }
         }
     }
     /*
@@ -240,6 +265,8 @@ void Game::matchCheck(){
     if it is check to see if it is one less number (mod 13) AND opposite color
     */
 }
+
+// Need to implemnet something if the card has been stacked on 
 
 void Game::cardGrab(){
     mousePosition = GetMousePosition(); // Mouse tracker 
