@@ -9,7 +9,9 @@ struct cardStruct{
             int row;
             int collumn;
             bool faceUp;
+            string color; 
             string suit;
+            
             Texture2D cardTexture;
             float recX;
             float recY;
@@ -27,6 +29,7 @@ class Game{
         void patternGen();
         void cardCoord();
         void snapBack();
+        void matchCheck();
     private:
 
         bool looping;
@@ -40,6 +43,7 @@ class Game{
         int grabId;
         int cardsLeft;
         cardStruct cardsArr[53];
+        int row1, row2, row3, row4, row5, row6, row7 = 0;
 };
 
 // THINGS NEEDED

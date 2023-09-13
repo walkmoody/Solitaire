@@ -46,6 +46,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 1;
         cardsArr[i + cardNum].collumn = i;
+        row1++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum = ranNum;
@@ -56,6 +57,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 2;
         cardsArr[i + cardNum].collumn = i;
+        row2++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -66,6 +68,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 3;
         cardsArr[i + cardNum].collumn = i;
+        row3++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -76,6 +79,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 4;
         cardsArr[i + cardNum].collumn = i;
+        row4++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -86,6 +90,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 5;
         cardsArr[i + cardNum].collumn = i;
+        row5++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -96,6 +101,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 6;
         cardsArr[i + cardNum].collumn = i;
+        row6++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -106,10 +112,10 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 7;
         cardsArr[i + cardNum].collumn = i;
+        row7++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
-    
 }
 
 void Game::Randomizer(){
@@ -122,7 +128,7 @@ void Game::Randomizer(){
             reset = false;
             num = rand() % cardTot;
             for(int j = 0; j < i; j++){
-                if (num == cardsArr[i].num)
+                if (num == cardsArr[j].num)
                     reset = true;
                 }}
             cardsArr[i].num = num;
@@ -149,14 +155,22 @@ void Game::cardLinker(){
             cardPull = cardPull + temp + "_of_";
         }
 
-        if (cardsArr[i].num < 13) // FIX ME FIX ME
+        if (cardsArr[i].num < 13){
             cardPull = cardPull + "diamonds.png";
-        else if (cardsArr[i].num < 26) // 13 + 13 = 26
+            cardsArr[i].color = "red";
+        }
+        else if (cardsArr[i].num < 26){
             cardPull = cardPull + "clubs.png";
-        else if (cardsArr[i].num < 39) // 26 + 13 = 39
+            cardsArr[i].color = "black";
+        }
+        else if (cardsArr[i].num < 39){
             cardPull = cardPull + "hearts.png";
-        else if (cardsArr[i].num < 52) // 39 + 13 = 52
+            cardsArr[i].color = "red";
+        }
+        else if (cardsArr[i].num < 52){
             cardPull = cardPull + "spades.png";
+            cardsArr[i].color = "black";
+        }
 
         const char* cString = cardPull.c_str();
         Image card = LoadImage(cString);                             
@@ -164,20 +178,11 @@ void Game::cardLinker(){
         cardsArr[i].cardTexture = LoadTextureFromImage(card);
         UnloadImage(card);
         temp[i] = cardPull;
-        
     }
     Image card = LoadImage("resources/cards/card_back.png");                             
     ImageResize(&card, width, height);
     cardBack = LoadTextureFromImage(card);
-    UnloadImage(card);
-    for (int i = 0; i < cardTot; i++)
-        for(int j = i + 1; j < cardTot; j++){
-            if (temp[i] == temp[j]){
-                std::cout << temp[i] << " " << i << std::endl;
-                std::cout << temp[j] << " " << j << std::endl;
-            }
-        }
-        
+    UnloadImage(card);        
 }
 
 void Game::cardPrint(){
@@ -198,6 +203,7 @@ void Game::cardPrint(){
             DrawTexture(cardBack, cardsArr[cardNum + i].recX, cardsArr[cardNum + i].recY, WHITE); 
     }
 }
+
 void Game::snapBack(){
         if(cardsArr[grabId].row == 1)
             cardsArr[grabId].recX = 25; 
@@ -219,10 +225,14 @@ void Game::snapBack(){
             cardsArr[grabId].recY = 200 + cardsArr[grabId].collumn * 25;
         else 
             cardsArr[grabId].recY = 10;
-
     }
 
-
+void Game::matchCheck(){
+    /*
+    if card is within coords of another card, check to see if its in those coords
+    if it is check to see if it is one less number (mod 13) AND opposite color
+    */
+}
 
 void Game::cardGrab(){
     mousePosition = GetMousePosition(); // Mouse tracker 
