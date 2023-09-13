@@ -5,6 +5,14 @@ using std::string;
 
 void Game::GamesInit(){
     Randomizer();
+    row1=0;
+    row2=0;
+    row3=0;
+    row4=0;
+    row5=0;
+    row6=0;
+    row7=0;
+    row8=0;
     patternGen();
     looping = true;
     cardCoord();
@@ -228,6 +236,7 @@ void Game::snapBack(){
         else 
             cardsArr[grabId].recY = 10;
     }
+
 void Game::removeRow(int r1, int r2){
     if(r1 == 1) row1--;
     if(r1 == 2) row2--;
@@ -254,35 +263,36 @@ void Game::topCheck(){
         if (!cardsArr[i].faceUp) {
             int row = cardsArr[i].row;
             int col = cardsArr[i].collumn;
+            std::cout << row << " " << col << " " << row1 << " " << row2 << " " << row3 << " " << row4 << " " << row5 << " " << row6 << " " << row7 << " " << row8 << std::endl;
             if(row == 1){
                 if (row1 == col) cardsArr[i].faceUp = true;
             }
             else if(row == 2){
-                if (row2 == col)  cardsArr[i].faceUp = true;
+                if (row2 - 1 == col)  cardsArr[i].faceUp = true;
             }
             else if(row == 3){
-                if (row3 == col)  cardsArr[i].faceUp = true;
+                if (row3 - 1  == col)  cardsArr[i].faceUp = true;
             }
             else if(row == 4){
-                if (row4 == col)  cardsArr[i].faceUp = true;
+                if (row4 - 1 == col)  cardsArr[i].faceUp = true;
             }
             else if(row == 5){
-                if (row5 == col)  cardsArr[i].faceUp = true;
+                if (row5 - 1 == col)  cardsArr[i].faceUp = true;
             }
             else if(row == 6){
-                if (row6 == col)  cardsArr[i].faceUp = true;
+                if (row6 - 1 == col)  cardsArr[i].faceUp = true;
             }
             else if(row == 7){
-                if (row7 == col)  cardsArr[i].faceUp = true;
+                if (row7 - 1 == col)  cardsArr[i].faceUp = true;
             }
             else if(row == 8){
-                if (row8 == col)  cardsArr[i].faceUp = true;
+                if (row8 - 1 == col)  cardsArr[i].faceUp = true;
             }
         }
     }
 }
 
-void Game::matchCheck(){
+void Game::matchCheck(){ // Yay working algorithm
     for (int i = 0; i < cardTot; i++){
         if(cardsArr[i].faceUp && grabId != i){
             if((cardsArr[grabId].recX > cardsArr[i].recX - 30 && cardsArr[grabId].recX < cardsArr[i].recX + 30) &&
@@ -292,14 +302,11 @@ void Game::matchCheck(){
                     removeRow(cardsArr[grabId].row, cardsArr[i].row);
                     cardsArr[grabId].row = cardsArr[i].row;
                     cardsArr[grabId].collumn = cardsArr[i].collumn + 1; 
-                    
+                    return
                 }
         }
     }
-    /*
-    if card is within coords of another card, check to see if its in those coords
-    if it is check to see if it is one less number (mod 13) AND opposite color
-    */
+    return false;
 }
 
 // Need to implemnet something if the card has been stacked on 
@@ -323,8 +330,10 @@ void Game::cardGrab(){
     }else grab = false;
     
     if(!grab){
-        matchCheck(); // let it return somethjing and then it can call checkcount 
+        bool check = matchCheck(); // let it return somethjing and then it can call checkcount 
+    if(!check)
         snapBack();
+    else if()
     if(checkCount == 0){
         topCheck();
         checkCount++;
