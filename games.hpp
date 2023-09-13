@@ -30,6 +30,7 @@ class Game{
         void snapBack();
         void matchCheck();
         void removeRow(int, int);
+        void topCheck();
     private:
 
         bool looping;

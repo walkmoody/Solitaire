@@ -136,7 +136,6 @@ void Game::Randomizer(){
         }
     }
     cardLinker();
-
 } 
 
 void Game::cardLinker(){
@@ -189,10 +188,12 @@ void Game::cardLinker(){
 void Game::cardPrint(){ // Could run through each collumn and print it from smallest to biggest (3 for loops)
     for(int j = 0; j < 12; j++){ // 12 being amount of rows
         for(int i = 0; i < cardTot; i++){
-            for (int k = 0; k < cardTot; k++){
-                if(cardsArr[i].row == j){ // print it by the row instead of collumn
+            if(cardsArr[i].row == j){ 
+                for (int k = 0; k < cardTot; k++){
+                //    int index[13];
+                // print it by the row instead of collumn
                     if(cardsArr[i].collumn == k){ // Fix me
-                        if(cardsArr[i].faceUp == false)
+                        if(!cardsArr[i].faceUp)
                             DrawTexture(cardBack, cardsArr[i].recX, cardsArr[i].recY, WHITE);   
                         else if (cardsArr[i].faceUp)  
                             DrawTexture(cardsArr[i].cardTexture, cardsArr[i].recX, cardsArr[i].recY, WHITE);
@@ -246,11 +247,57 @@ void Game::removeRow(int r1, int r2){
     if(r2 == 7) row7++;
 
 }
+void Game::topCheck(){
+    for (int i = 0; i < cardTot; i++){
+        if(!cardsArr[i].faceUp){
+            if(cardsArr[i].row == 1){
+                if(cardsArr[i].collumn == row1 - 1){
+                    cardsArr[i].faceUp = true;
+                }
+            }
+            else if(cardsArr[i].row == 2){
+                if(cardsArr[i].collumn == row2 - 1){
+                    cardsArr[i].faceUp = true;
+                }
+            }
+            else if(cardsArr[i].row == 3){
+                if(cardsArr[i].collumn == row3 - 1){
+                    cardsArr[i].faceUp = true;
+                }
+            }
+            else if(cardsArr[i].row == 4){
+                if(cardsArr[i].collumn == row4 - 1){
+                    cardsArr[i].faceUp = true;
+                }
+            }
+            else if(cardsArr[i].row == 5){
+                if(cardsArr[i].collumn == row5 - 1){
+                    cardsArr[i].faceUp = true;
+                }
+            }
+            else if(cardsArr[i].row == 6){
+                if(cardsArr[i].collumn == row6 - 1){
+                    cardsArr[i].faceUp = true;
+                }
+            }
+            else if(cardsArr[i].row == 7){
+                if(cardsArr[i].collumn == row7 - 1){
+                    cardsArr[i].faceUp = true;
+                }
+            }
+            else if(cardsArr[i].row == 8){
+                if(cardsArr[i].collumn == row8 - 1){
+                    cardsArr[i].faceUp = true;
+                }
+            }
+        }
+    }
+}
 
 void Game::matchCheck(){
     for (int i = 0; i < cardTot; i++){
         if(cardsArr[i].faceUp && grabId != i){
-            if((cardsArr[grabId].recX > cardsArr[i].recX - 15 && cardsArr[grabId].recX < cardsArr[i].recX + 15) &&
+            if((cardsArr[grabId].recX > cardsArr[i].recX - 30 && cardsArr[grabId].recX < cardsArr[i].recX + 30) &&
             (cardsArr[grabId].recY > cardsArr[i].recY - 30 && cardsArr[grabId].recY < cardsArr[i].recY + 50))
                 if(cardsArr[grabId].num % 13 == cardsArr[i].num % 13 - 1 && cardsArr[grabId].color != cardsArr[i].color
                 && !(cardsArr[i].row > 7 )){
@@ -288,6 +335,7 @@ void Game::cardGrab(){
     if(!grab){
         matchCheck();
         snapBack();
+        topCheck();
     }
 
     // if grab is false make sure every card is in correct location (snap back time)
