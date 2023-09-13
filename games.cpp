@@ -302,11 +302,9 @@ void Game::matchCheck(){ // Yay working algorithm
                     removeRow(cardsArr[grabId].row, cardsArr[i].row);
                     cardsArr[grabId].row = cardsArr[i].row;
                     cardsArr[grabId].collumn = cardsArr[i].collumn + 1; 
-                    return
                 }
         }
     }
-    return false;
 }
 
 // Need to implemnet something if the card has been stacked on 
