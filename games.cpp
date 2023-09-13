@@ -36,6 +36,7 @@ void Game::cardCoord(){
         cardsArr[i].recX = 10 + (i - cardNum) * 10;
         cardsArr[i].recY = 10;
         cardsArr[i].collumn = i - cardNum;
+        row8++;
     }
     cardsArr[cardTot - 1].faceUp = true;
 }
@@ -185,23 +186,23 @@ void Game::cardLinker(){
     UnloadImage(card);        
 }
 
-void Game::cardPrint(){
-    
-    for(int i = 0; i < cardNum; i++){ // print it by the row instead of collumn
-        if(cardsArr[i].faceUp == false)
-            DrawTexture(cardBack, cardsArr[i].recX, cardsArr[i].recY, WHITE);   
-        else if (cardsArr[i].faceUp)  
-            DrawTexture(cardsArr[i].cardTexture, cardsArr[i].recX, cardsArr[i].recY, WHITE);
+void Game::cardPrint(){ // Could run through each collumn and print it from smallest to biggest (3 for loops)
+    for(int j = 0; j < 12; j++){ // 12 being amount of rows
+        for(int i = 0; i < cardTot; i++){
+            for (int k = 0; k < cardTot; k++){
+                if(cardsArr[i].row == j){ // print it by the row instead of collumn
+                    if(cardsArr[i].collumn == k){ // Fix me
+                        if(cardsArr[i].faceUp == false)
+                            DrawTexture(cardBack, cardsArr[i].recX, cardsArr[i].recY, WHITE);   
+                        else if (cardsArr[i].faceUp)  
+                            DrawTexture(cardsArr[i].cardTexture, cardsArr[i].recX, cardsArr[i].recY, WHITE);
+                    }
+                }
+            }
+    }
     }
     if(grab)
         DrawTexture(cardsArr[grabId].cardTexture, cardsArr[grabId].recX, cardsArr[grabId].recY, WHITE);
-    cardsLeft = cardTot - cardNum; // should this constantly be calculating?
-    for(int i = 0; i < cardsLeft; i++){
-        if (cardsArr[cardNum + i].faceUp)  
-            DrawTexture(cardsArr[cardNum + i].cardTexture, cardsArr[cardNum + i].recX, cardsArr[cardNum + i].recY, WHITE); 
-        else   
-            DrawTexture(cardBack, cardsArr[cardNum + i].recX, cardsArr[cardNum + i].recY, WHITE); 
-    }
 }
 
 void Game::snapBack(){
