@@ -330,10 +330,8 @@ void Game::cardGrab(){
     }else grab = false;
     
     if(!grab){
-        bool check = matchCheck(); // let it return somethjing and then it can call checkcount 
-    if(!check)
+        matchCheck(); // let it return somethjing and then it can call checkcount 
         snapBack();
-    else if()
     if(checkCount == 0){
         topCheck();
         checkCount++;
