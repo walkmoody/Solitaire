@@ -247,48 +247,36 @@ void Game::removeRow(int r1, int r2){
     if(r2 == 7) row7++;
 
 }
+
 void Game::topCheck(){
-    for (int i = 0; i < cardTot; i++){
-        if(!cardsArr[i].faceUp){
-            if(cardsArr[i].row == 1){
-                if(cardsArr[i].collumn == row1 - 1){
-                    cardsArr[i].faceUp = true;
-                }
+    std::cout << "test" << std::endl;
+    for (int i = 0; i < cardTot; i++) {
+        if (!cardsArr[i].faceUp) {
+            int row = cardsArr[i].row;
+            int col = cardsArr[i].collumn;
+            if(row == 1){
+                if (row1 == col) cardsArr[i].faceUp = true;
             }
-            else if(cardsArr[i].row == 2){
-                if(cardsArr[i].collumn == row2 - 1){
-                    cardsArr[i].faceUp = true;
-                }
+            else if(row == 2){
+                if (row2 == col)  cardsArr[i].faceUp = true;
             }
-            else if(cardsArr[i].row == 3){
-                if(cardsArr[i].collumn == row3 - 1){
-                    cardsArr[i].faceUp = true;
-                }
+            else if(row == 3){
+                if (row3 == col)  cardsArr[i].faceUp = true;
             }
-            else if(cardsArr[i].row == 4){
-                if(cardsArr[i].collumn == row4 - 1){
-                    cardsArr[i].faceUp = true;
-                }
+            else if(row == 4){
+                if (row4 == col)  cardsArr[i].faceUp = true;
             }
-            else if(cardsArr[i].row == 5){
-                if(cardsArr[i].collumn == row5 - 1){
-                    cardsArr[i].faceUp = true;
-                }
+            else if(row == 5){
+                if (row5 == col)  cardsArr[i].faceUp = true;
             }
-            else if(cardsArr[i].row == 6){
-                if(cardsArr[i].collumn == row6 - 1){
-                    cardsArr[i].faceUp = true;
-                }
+            else if(row == 6){
+                if (row6 == col)  cardsArr[i].faceUp = true;
             }
-            else if(cardsArr[i].row == 7){
-                if(cardsArr[i].collumn == row7 - 1){
-                    cardsArr[i].faceUp = true;
-                }
+            else if(row == 7){
+                if (row7 == col)  cardsArr[i].faceUp = true;
             }
-            else if(cardsArr[i].row == 8){
-                if(cardsArr[i].collumn == row8 - 1){
-                    cardsArr[i].faceUp = true;
-                }
+            else if(row == 8){
+                if (row8 == col)  cardsArr[i].faceUp = true;
             }
         }
     }
@@ -325,17 +313,22 @@ void Game::cardGrab(){
             if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].recX + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
                 grab = true;
                 grabId = i;
+                
             }
         else if (grab) {
             cardsArr[grabId].recX = mouseX - width/2;
             cardsArr[grabId].recY = mouseY - height/2;
+            checkCount = 0;
         }
     }else grab = false;
     
     if(!grab){
-        matchCheck();
+        matchCheck(); // let it return somethjing and then it can call checkcount 
         snapBack();
+    if(checkCount == 0){
         topCheck();
+        checkCount++;
+    }
     }
 
     // if grab is false make sure every card is in correct location (snap back time)
