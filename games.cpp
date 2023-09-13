@@ -228,6 +228,13 @@ void Game::snapBack(){
     }
 
 void Game::matchCheck(){
+    for (int i = 0; i < cardTot; i++){
+        if(cardsArr[i].faceUp && grabId != i){
+            if((cardsArr[grabId].recX > cardsArr[i].recX - 15 && cardsArr[grabId].recX < cardsArr[i].recX + 15) &&
+            (cardsArr[grabId].recY > cardsArr[i].recY - 30 && cardsArr[grabId].recY < cardsArr[i].recY + 30))
+                std::cout << "True" << std::endl;
+        }
+    }
     /*
     if card is within coords of another card, check to see if its in those coords
     if it is check to see if it is one less number (mod 13) AND opposite color
@@ -249,9 +256,11 @@ void Game::cardGrab(){
             cardsArr[grabId].recY = mouseY - height/2;
         }
     }else grab = false;
-    if(!grab)
+    
+    if(!grab){
+        matchCheck();
         snapBack();
-
+    }
 
     // if grab is false make sure every card is in correct location (snap back time)
 }

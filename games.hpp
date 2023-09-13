@@ -11,7 +11,6 @@ struct cardStruct{
             bool faceUp;
             string color; 
             string suit;
-            
             Texture2D cardTexture;
             float recX;
             float recY;
