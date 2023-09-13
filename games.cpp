@@ -196,17 +196,15 @@ void Game::cardLinker(){
 void Game::cardPrint(){ // Could run through each collumn and print it from smallest to biggest (3 for loops)
     for(int j = 0; j < 12; j++){ // 12 being amount of rows
         for(int i = 0; i < cardTot; i++){
-            if(cardsArr[i].row == j){ 
-                for (int k = 0; k < cardTot; k++){
-                //    int index[13];
-                // print it by the row instead of collumn
-                    if(cardsArr[i].collumn == k){ // Fix me
+            //if(cardsArr[i].row == j){ 
+                for (int k = 0; k < 13; k++){ // k may need to stay constant while the i iterates cus as it is right now i is constant and k changes
+                    if(cardsArr[i].collumn == k && cardsArr[i].row == j){ 
                         if(!cardsArr[i].faceUp)
                             DrawTexture(cardBack, cardsArr[i].recX, cardsArr[i].recY, WHITE);   
                         else if (cardsArr[i].faceUp)  
                             DrawTexture(cardsArr[i].cardTexture, cardsArr[i].recX, cardsArr[i].recY, WHITE);
                     }
-                }
+                //}
             }
     }
     }
@@ -328,7 +326,7 @@ void Game::cardGrab(){
     }else grab = false;
     
     if(!grab){
-        matchCheck(); // let it return somethjing and then it can call checkcount 
+        matchCheck(); // let it return something and then it can call checkcount 
         snapBack();
     if(checkCount == 0){
         topCheck();
