@@ -196,15 +196,15 @@ void Game::cardLinker(){
 void Game::cardPrint(){ // Could run through each collumn and print it from smallest to biggest (3 for loops)
     for(int j = 0; j < 12; j++){ // 12 being amount of rows
         for(int i = 0; i < cardTot; i++){
-            //if(cardsArr[i].row == j){ 
-                for (int k = 0; k < 13; k++){ // k may need to stay constant while the i iterates cus as it is right now i is constant and k changes
-                    if(cardsArr[i].collumn == k && cardsArr[i].row == j){ 
-                        if(!cardsArr[i].faceUp)
-                            DrawTexture(cardBack, cardsArr[i].recX, cardsArr[i].recY, WHITE);   
-                        else if (cardsArr[i].faceUp)  
-                            DrawTexture(cardsArr[i].cardTexture, cardsArr[i].recX, cardsArr[i].recY, WHITE);
+            for(int l = 0; l < 52; l++){
+                for (int k = 0; k < 52; k++){ // k may need to stay constant while the i iterates cus as it is right now i is constant and k changes
+                    if(cardsArr[k].collumn == l && cardsArr[k].row == j){ 
+                        if(!cardsArr[k].faceUp)
+                            DrawTexture(cardBack, cardsArr[k].recX, cardsArr[k].recY, WHITE);   
+                        else if (cardsArr[k].faceUp)  
+                            DrawTexture(cardsArr[k].cardTexture, cardsArr[k].recX, cardsArr[k].recY, WHITE);
                     }
-                //}
+                }
             }
     }
     }
@@ -316,7 +316,6 @@ void Game::cardGrab(){
             if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].recX + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
                 grab = true;
                 grabId = i;
-                
             }
         else if (grab) {
             cardsArr[grabId].recX = mouseX - width/2;
@@ -326,15 +325,13 @@ void Game::cardGrab(){
     }else grab = false;
     
     if(!grab){
-        matchCheck(); // let it return something and then it can call checkcount 
-        snapBack();
+        matchCheck(); // checks to see if card can/should be moved
+        snapBack(); // Makes sure every card is in the correct location
     if(checkCount == 0){
-        topCheck();
+        topCheck(); // flips card over if needed 
         checkCount++;
     }
     }
-
-    // if grab is false make sure every card is in correct location (snap back time)
 }
 
 string Game::GameLoop(){
