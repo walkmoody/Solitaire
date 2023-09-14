@@ -256,12 +256,10 @@ void Game::removeRow(int r1, int r2){
 }
 
 void Game::topCheck(){
-    std::cout << "test" << std::endl;
     for (int i = 0; i < cardTot; i++) {
         if (!cardsArr[i].faceUp) {
             int row = cardsArr[i].row;
             int col = cardsArr[i].collumn;
-            std::cout << row << " " << col << " " << row1 << " " << row2 << " " << row3 << " " << row4 << " " << row5 << " " << row6 << " " << row7 << " " << row8 << std::endl;
             if(row == 1){
                 if (row1 == col) cardsArr[i].faceUp = true;
             }
