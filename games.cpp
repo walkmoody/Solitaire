@@ -166,18 +166,22 @@ void Game::cardLinker(){
         if (cardsArr[i].num < 13){
             cardPull = cardPull + "diamonds.png";
             cardsArr[i].color = "red";
+            cardsArr[i].suit = "diamond";
         }
         else if (cardsArr[i].num < 26){
             cardPull = cardPull + "clubs.png";
             cardsArr[i].color = "black";
+            cardsArr[i].suit = "club";
         }
         else if (cardsArr[i].num < 39){
             cardPull = cardPull + "hearts.png";
             cardsArr[i].color = "red";
+            cardsArr[i].suit = "heart";
         }
         else if (cardsArr[i].num < 52){
             cardPull = cardPull + "spades.png";
             cardsArr[i].color = "black";
+            cardsArr[i].suit = "spade";
         }
 
         const char* cString = cardPull.c_str();
