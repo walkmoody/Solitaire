@@ -5,14 +5,7 @@ using std::string;
 
 void Game::GamesInit(){
     Randomizer();
-    row1=0;
-    row2=0;
-    row3=0;
-    row4=0;
-    row5=0;
-    row6=0;
-    row7=0;
-    row8=0;
+    row1=0; row2=0; row3=0; row4=0; row5=0; row6=0; row7=0; row8=0;
     patternGen();
     looping = true;
     cardCoord();
