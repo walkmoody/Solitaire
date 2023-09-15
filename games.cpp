@@ -127,9 +127,9 @@ void Game::patternGen(){
     cardNum += ranNum;
 }
 
-void Game::Randomizer(){
+void Game::Randomizer(){ // randomizes the number inside of cardsArr
     int num = 0;
-    for(int i = 0; i < cardTot; i++){ // 52 = amount of cards
+    for(int i = 0; i < cardTot; i++){ // cardTot = 52
         bool reset = true;
         if (i == 0)
             cardsArr[i].num = rand() % cardTot;
@@ -146,8 +146,7 @@ void Game::Randomizer(){
     cardLinker();
 } 
 
-void Game::cardLinker(){
-    string temp[52];
+void Game::cardLinker(){ // links up the randomized cards with correct texture
     for (int i = 0; i < cardTot; i++){
         string cardPull = "resources/cards/";
         if (cardsArr[i].num % 13 == 0)
@@ -189,7 +188,6 @@ void Game::cardLinker(){
         ImageResize(&card, width, height);
         cardsArr[i].cardTexture = LoadTextureFromImage(card);
         UnloadImage(card);
-        temp[i] = cardPull;
     }
     Image card = LoadImage("resources/cards/card_back.png");                             
     ImageResize(&card, width, height);
@@ -212,11 +210,11 @@ void Game::cardPrint(){ // Could run through each collumn and print it from smal
             }
     }
     }
-    if(grab)
+    if(grab) // the card that is being held is placed on top layer 
         DrawTexture(cardsArr[grabId].cardTexture, cardsArr[grabId].recX, cardsArr[grabId].recY, WHITE);
 }
 
-void Game::snapBack(){
+void Game::snapBack(){ // sends card back to where it needs to go
         if(cardsArr[grabId].row == 1)
             cardsArr[grabId].recX = 25; 
         else if(cardsArr[grabId].row == 2)
@@ -232,7 +230,7 @@ void Game::snapBack(){
         else if(cardsArr[grabId].row == 7)
             cardsArr[grabId].recX = 775; 
         else if(cardsArr[grabId].row == 8)
-             cardsArr[grabId].recX = 10 + (cardsArr[grabId].collumn) * 10;
+            cardsArr[grabId].recX = 10 + (cardsArr[grabId].collumn) * 10;
         if(cardsArr[grabId].row != 8)    
             cardsArr[grabId].recY = 200 + cardsArr[grabId].collumn * 25;
         else 
@@ -351,20 +349,20 @@ string Game::GameLoop(){
         }
         cardGrab();
         BeginDrawing();
-            ClearBackground(LIME);
+            ClearBackground(LIME); // background color
                 
-                DrawLine(GetScreenWidth() - 150, 0, GetScreenWidth() - 150, GetScreenHeight(), Fade(LIGHTGRAY, 0.6f));
+                DrawLine(GetScreenWidth() - 150, 0, GetScreenWidth() - 150, GetScreenHeight(), Fade(LIGHTGRAY, 0.6f)); // line on right side
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f)); // bar on right side
-                DrawLine(0, 180, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.6f));
-                DrawRectangle(0, 0, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.3f));
-                cardPrint();
+                DrawLine(0, 180, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.6f)); // line up top
+                DrawRectangle(0, 0, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.3f)); // bar up top
+                cardPrint(); // calls function to print
 
         EndDrawing();
     }
     return "menu";
 }
 
-void Game::deconstuct(){
+void Game::deconstuct(){ // deallocating memory of the textures
     for (int i = 0; i < cardTot; i++){
        UnloadTexture(cardsArr[i].cardTexture);
     }
