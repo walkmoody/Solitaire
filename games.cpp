@@ -306,6 +306,12 @@ void Game::matchCheck(){ // Yay working algorithm
         }
     }
 }
+// need to implement specialChecks() or something similar that will look for 
+// aces that can be put on the right, finally adding a win condition
+
+// need to add something to change the card at the top
+
+// need to allow the king to be placed on black spaces
 
 // Need to implemnet something if the card has been stacked on 
 
