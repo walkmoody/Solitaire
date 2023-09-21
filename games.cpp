@@ -192,7 +192,7 @@ void Game::cardPrint(){ // Could run through each collumn and print it from smal
     for(int j = 0; j < 12; j++){ // 12 being amount of rows
         for(int i = 0; i < cardTot; i++){
             for(int l = 0; l < 52; l++){
-                for (int k = 0; k < 52; k++){ // k may need to stay constant while the i iterates cus as it is right now i is constant and k changes
+                for (int k = 0; k < 52; k++){ 
                     if(cardsArr[k].collumn == l && cardsArr[k].row == j){ 
                         if(!cardsArr[k].faceUp)
                             DrawTexture(cardBack, cardsArr[k].recX, cardsArr[k].recY, WHITE);   
