@@ -309,6 +309,11 @@ void Game::matchCheck(){ // Yay working algorithm
 void Game::deckChange(float mouseX, float mouseY){
     if((mouseX > buttonX && mouseX < buttonX + 50) && (mouseY > buttonY && mouseY < buttonY + 50)){ // 50 is the height and width of button
         std::cout << "test" << rand() << std::endl;
+        // for loop that runs through all left over cards in the deck
+        // look for row 8 cards 
+        // should change the collumn number?
+        // yes just add one to each collumn number and then set the top one to be 0 - should work
+        // keep the highest ID and I will do that seperatly
     }
 }
 
