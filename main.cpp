@@ -16,7 +16,7 @@ int main(void){
 
     SetTargetFPS(120);
     
-    
+   
 
     string screen = "splash";
     Menus displayScreen;
