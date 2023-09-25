@@ -307,7 +307,7 @@ void Game::matchCheck(){ // Yay working algorithm
 // Need to implemnet something if the card has been stacked on 
 void Game::deckChange(float mouseX, float mouseY){
     if(mouseX > 600 && mouseX < 650 && mouseY > 50 && mouseY < 100 ){
-        std::cout << "test" << std::endl;
+        std::cout << "test" << rand() << std::endl;
     }
 }
 
