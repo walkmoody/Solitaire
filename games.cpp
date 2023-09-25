@@ -305,8 +305,9 @@ void Game::matchCheck(){ // Yay working algorithm
 // need to allow the king to be placed on black spaces
 
 // Need to implemnet something if the card has been stacked on 
+// Move what ever is on top of the deck, bring the next one out
 void Game::deckChange(float mouseX, float mouseY){
-    if(mouseX > 600 && mouseX < 650 && mouseY > 50 && mouseY < 100 ){
+    if((mouseX > buttonX && mouseX < buttonX + 50) && (mouseY > buttonY && mouseY < buttonY + 50)){ // 50 is the height and width of button
         std::cout << "test" << rand() << std::endl;
     }
 }
@@ -316,7 +317,9 @@ void Game::cardGrab(){
     float mouseX = mousePosition.x;
     float mouseY = mousePosition.y; 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
-        deckChange(mouseX, mouseY);
+        if(!click)
+            deckChange(mouseX, mouseY);
+        click = true;
         for (int i = 0; i < cardTot; i++)
             if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].recX + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
                 grab = true;
@@ -327,7 +330,10 @@ void Game::cardGrab(){
             cardsArr[grabId].recY = mouseY - height/2;
             checkCount = 0;
         }
-    }else grab = false;
+    }else{
+        grab = false;
+        click = false;
+    }
     
     if(!grab){
         matchCheck(); // checks to see if card can/should be moved
@@ -354,7 +360,7 @@ string Game::GameLoop(){
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f)); // bar on right side
                 DrawLine(0, 180, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.6f)); // line up top
                 DrawRectangle(0, 0, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.3f)); // bar up top
-                DrawRectangle(600, 100, 50, 50, Fade(LIGHTGRAY, 0.9f)); //button
+                DrawRectangle(buttonX, buttonY, 50, 50, Fade(LIGHTGRAY, 0.9f)); //button // Need to design what the button should look like // add something to tell the user what it does
                 cardPrint(); // calls function to print
 
         EndDrawing();
