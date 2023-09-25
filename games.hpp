@@ -31,6 +31,7 @@ class Game{
         void matchCheck();
         void removeRow(int, int);
         void topCheck();
+        void deckChange(float, float);
     private:
 
         bool looping;

@@ -305,12 +305,18 @@ void Game::matchCheck(){ // Yay working algorithm
 // need to allow the king to be placed on black spaces
 
 // Need to implemnet something if the card has been stacked on 
+void Game::deckChange(float mouseX, float mouseY){
+    if(mouseX > 600 && mouseX < 650 && mouseY > 50 && mouseY < 100 ){
+        std::cout << "test" << std::endl;
+    }
+}
 
 void Game::cardGrab(){
     mousePosition = GetMousePosition(); // Mouse tracker 
     float mouseX = mousePosition.x;
     float mouseY = mousePosition.y; 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
+        deckChange(mouseX, mouseY);
         for (int i = 0; i < cardTot; i++)
             if (!grab && cardsArr[i].faceUp && float(mouseX) > float(cardsArr[i].recX) && float(mouseX) < float(cardsArr[i].recX + width) && float(mouseY) > float(cardsArr[i].recY) && float(mouseY) < float(cardsArr[i].recY + height)){
                 grab = true;
@@ -348,6 +354,7 @@ string Game::GameLoop(){
                 DrawRectangle(GetScreenWidth() - 150, 0, GetScreenWidth() - 500, GetScreenHeight(), Fade(LIGHTGRAY, 0.3f)); // bar on right side
                 DrawLine(0, 180, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.6f)); // line up top
                 DrawRectangle(0, 0, GetScreenWidth() - 150, 180, Fade(LIGHTGRAY, 0.3f)); // bar up top
+                DrawRectangle(600, 100, 50, 50, Fade(LIGHTGRAY, 0.9f)); //button
                 cardPrint(); // calls function to print
 
         EndDrawing();
