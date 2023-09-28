@@ -314,8 +314,15 @@ void Game::deckChange(float mouseX, float mouseY){
         // should change the collumn number?
         // yes just add one to each collumn number and then set the top one to be 0 - should work
         // keep the highest ID and I will do that seperatly
+        for (int i = 0; i < cardTot; i++){
+            if(cardArr[i].row == 8){
+                // double for loop
+            }
+        }
     }
 }
+
+
 
 void Game::cardGrab(){
     mousePosition = GetMousePosition(); // Mouse tracker 
