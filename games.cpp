@@ -34,12 +34,14 @@ void Game::cardCoord(){
     for (int i = cardNum; i < cardTot; i++){
         cardsArr[i].row = 8;
         cardsArr[i].faceUp = false;
+        cardsArr[i].isTop = false;
         cardsArr[i].recX = 10 + (i - cardNum) * 10;
         cardsArr[i].recY = 10;
         cardsArr[i].collumn = i - cardNum;
         row8++;
     }
     cardsArr[cardTot - 1].faceUp = true;
+    cardsArr[cardTot - 1].isTop = true;
 }
 
 void Game::patternGen(){
@@ -306,35 +308,32 @@ void Game::matchCheck(){ // Yay working algorithm
 
 // Need to implemnet something if the card has been stacked on 
 // Move what ever is on top of the deck, bring the next one out
-void Game::deckChange(float mouseX, float mouseY){
+void Game::deckChange(float mouseX, float mouseY){ // Buggy function
     if((mouseX > buttonX && mouseX < buttonX + 50) && (mouseY > buttonY && mouseY < buttonY + 50)){ // 50 is the height and width of button
-        std::cout << "test" << rand() << std::endl;
-        // for loop that runs through all left over cards in the deck
-        // look for row 8 cards 
-        // should change the collumn number?
-        // yes just add one to each collumn number and then set the top one to be 0 - should work
-        // keep the highest ID and I will do that seperatly
-        int firstInd = 0;
+        int firstInd = 0; // Should compare their xvalues since that will be the most accurate
         int count = 0;
+        int maxInd = 0;
+        int newMax = 0;
         for (int i = 0; i < cardTot; i++){
-            
             if(cardsArr[i].row == 8){
-                if (count == 0)
+                if (count == 0){
                     firstInd = i;
-                else{
-                for(int j = i + 1; j < cardTot; j++)
-                    if(cardsArr[i].row == 8){
-                        cardsArr[i].collumn = cardsArr[j].collumn;
-                        break;
-                    }
+                    count = 1;
                 }
-                count++;
-            }
+                cardsArr[i].recX = cardsArr[i].recX +10;
+                if(cardsArr[i].recX > maxInd){
+                    newMax = maxInd;
+                    maxInd = i;
+                }
+            }     
         }
+        cardsArr[newMax].faceUp = true;
+        cardsArr[newMax].isTop = true;
+        cardsArr[maxInd].recX = 10;
+        cardsArr[maxInd].faceUp = false;
+        cardsArr[maxInd].isTop = false;
     }
 }
-
-
 
 void Game::cardGrab(){
     mousePosition = GetMousePosition(); // Mouse tracker 

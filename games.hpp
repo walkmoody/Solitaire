@@ -14,6 +14,7 @@ struct cardStruct{
             Texture2D cardTexture;
             float recX;
             float recY;
+            bool isTop;
         };
 
 class Game{
