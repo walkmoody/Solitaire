@@ -314,9 +314,21 @@ void Game::deckChange(float mouseX, float mouseY){
         // should change the collumn number?
         // yes just add one to each collumn number and then set the top one to be 0 - should work
         // keep the highest ID and I will do that seperatly
+        int firstInd = 0;
+        int count = 0;
         for (int i = 0; i < cardTot; i++){
-            if(cardArr[i].row == 8){
-                // double for loop
+            
+            if(cardsArr[i].row == 8){
+                if (count == 0)
+                    firstInd = i;
+                else{
+                for(int j = i + 1; j < cardTot; j++)
+                    if(cardsArr[i].row == 8){
+                        cardsArr[i].collumn = cardsArr[j].collumn;
+                        break;
+                    }
+                }
+                count++;
             }
         }
     }
