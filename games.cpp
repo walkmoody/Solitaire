@@ -318,10 +318,11 @@ void Game::deckChange(float mouseX, float mouseY){ // Buggy function
             if(cardsArr[i].row == 8){
                 if (count == 0){
                     firstInd = i;
+                    maxInd = firstInd;
                     count = 1;
                 }
                 cardsArr[i].recX = cardsArr[i].recX +10;
-                if(cardsArr[i].recX > maxInd){
+                if(cardsArr[i].recX > cardsArr[maxInd].recX){ // this logic makes no sense
                     newMax = maxInd;
                     maxInd = i;
                 }
