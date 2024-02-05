@@ -55,6 +55,8 @@ class Game{
 
 // THINGS NEEDED
 /*
-Randomizer to randomize the cards
-Cards 1-52 (need to build that with some sort of dictionary/ hash table)
+Cards are randomized, need to be able to stack cards and only look at top
+Need to make it so you can grab multiple cards
+When clicking for new card, bottom card shouldnt be up top
+Aces cant be put on the side
 */
