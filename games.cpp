@@ -13,7 +13,7 @@ void Game::GamesInit(){
     grabId = 0;
 }
 
-void Game::cardCoord(){
+void Game::cardCoord(){ // This is a bad coordinate system
     for(int i = 0; i < cardNum; i++){
         if(cardsArr[i].row == 1)
             cardsArr[i].recX = 25; 
@@ -252,7 +252,7 @@ void Game::removeRow(int r1, int r2){
 
 }
 
-void Game::topCheck(){
+void Game::topCheck(){ // Bad Alg
     for (int i = 0; i < cardTot; i++) {
         if (!cardsArr[i].faceUp) {
             int row = cardsArr[i].row;

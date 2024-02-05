@@ -21,7 +21,7 @@ int main(void){
     string screen = "splash";
     Menus displayScreen;
     displayScreen.menusInit();
-
+// Game takes awhile to load
     while(!WindowShouldClose()){ // Menu system breaks if spammed multiple times
         if(screen == "splash")
             screen = displayScreen.splash();
