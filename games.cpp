@@ -5,7 +5,10 @@ using std::string;
 
 void Game::GamesInit(){
     Randomizer();
-    row1=0; row2=0; row3=0; row4=0; row5=0; row6=0; row7=0; row8=0;
+    //row1=0; row2=0; row3=0; row4=0; row5=0; row6=0; row7=0; row8=0;
+    for (int i = 0; i < rowCount; i++){
+        row[i] = 0;
+    }
     patternGen();
     looping = true;
     cardCoord();
@@ -38,7 +41,7 @@ void Game::cardCoord(){ // This is a bad coordinate system
         cardsArr[i].recX = 10 + (i - cardNum) * 10;
         cardsArr[i].recY = 10;
         cardsArr[i].collumn = i - cardNum;
-        row8++;
+        row[7]++;
     }
     cardsArr[cardTot - 1].faceUp = true;
     cardsArr[cardTot - 1].isTop = true;
@@ -50,7 +53,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 1;
         cardsArr[i + cardNum].collumn = i;
-        row1++;
+        row[0]++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum = ranNum;
@@ -61,7 +64,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 2;
         cardsArr[i + cardNum].collumn = i;
-        row2++;
+        row[1]++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -72,7 +75,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 3;
         cardsArr[i + cardNum].collumn = i;
-        row3++;
+        row[2]++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -83,7 +86,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 4;
         cardsArr[i + cardNum].collumn = i;
-        row4++;
+        row[3]++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -94,7 +97,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 5;
         cardsArr[i + cardNum].collumn = i;
-        row5++;
+        row[4]++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -105,7 +108,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 6;
         cardsArr[i + cardNum].collumn = i;
-        row6++;
+        row[5]++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -116,7 +119,7 @@ void Game::patternGen(){
     for (int i = 0; i < ranNum; i++){
         cardsArr[i + cardNum].row = 7;
         cardsArr[i + cardNum].collumn = i;
-        row7++;
+        row[6]++;
         if(i == ranNum - 1) cardsArr[i + cardNum].faceUp = true; else cardsArr[i + cardNum].faceUp = false;
     }
     cardNum += ranNum;
@@ -232,54 +235,40 @@ void Game::snapBack(){ // sends card back to where it needs to go
             cardsArr[grabId].recY = 10;
     }
 
-void Game::removeRow(int r1, int r2){
-    if(r1 == 1) row1--;
-    if(r1 == 2) row2--;
-    if(r1 == 3) row3--;
-    if(r1 == 4) row4--;
-    if(r1 == 5) row5--;
-    if(r1 == 6) row6--;
-    if(r1 == 7) row7--;
-    if(r1 == 8) row8--;
-
-    if(r2 == 1) row1++;
-    if(r2 == 2) row2++;
-    if(r2 == 3) row3++;
-    if(r2 == 4) row4++;
-    if(r2 == 5) row5++;
-    if(r2 == 6) row6++;
-    if(r2 == 7) row7++;
-
+void Game::removeRow(int r1, int r2){ // Bad
+    row[r1-1]--;
+    row[r2-1]++;
 }
 
 void Game::topCheck(){ // Bad Alg
-    for (int i = 0; i < cardTot; i++) {
+    for (int i = 0; i < cardTot; i++) { // Needs to convert to array 
         if (!cardsArr[i].faceUp) {
-            int row = cardsArr[i].row;
+            int rowCheck = cardsArr[i].row;
             int col = cardsArr[i].collumn;
-            if(row == 1){
-                if (row1 == col) cardsArr[i].faceUp = true;
+            
+            if(rowCheck == 1){
+                if (row[0] == col) cardsArr[i].faceUp = true;
             }
-            else if(row == 2){
-                if (row2 - 1 == col)  cardsArr[i].faceUp = true;
+            else if(rowCheck == 2){
+                if (row[1] - 1 == col)  cardsArr[i].faceUp = true;
             }
-            else if(row == 3){
-                if (row3 - 1  == col)  cardsArr[i].faceUp = true;
+            else if(rowCheck == 3){
+                if (row[2] - 1  == col)  cardsArr[i].faceUp = true;
             }
-            else if(row == 4){
-                if (row4 - 1 == col)  cardsArr[i].faceUp = true;
+            else if(rowCheck == 4){
+                if (row[3] - 1 == col)  cardsArr[i].faceUp = true;
             }
-            else if(row == 5){
-                if (row5 - 1 == col)  cardsArr[i].faceUp = true;
+            else if(rowCheck == 5){
+                if (row[4] - 1 == col)  cardsArr[i].faceUp = true;
             }
-            else if(row == 6){
-                if (row6 - 1 == col)  cardsArr[i].faceUp = true;
+            else if(rowCheck == 6){
+                if (row[5] - 1 == col)  cardsArr[i].faceUp = true;
             }
-            else if(row == 7){
-                if (row7 - 1 == col)  cardsArr[i].faceUp = true;
+            else if(rowCheck == 7){
+                if (row[6] - 1 == col)  cardsArr[i].faceUp = true;
             }
-            else if(row == 8){
-                if (row8 - 1 == col)  cardsArr[i].faceUp = true;
+            else if(rowCheck == 8){
+                if (row[7] - 1 == col)  cardsArr[i].faceUp = true;
             }
         }
     }

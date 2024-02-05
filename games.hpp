@@ -47,6 +47,9 @@ class Game{
         int cardsLeft;
         cardStruct cardsArr[53];
         int row1, row2, row3, row4, row5, row6, row7, row8; // Keeps track of how many cards are in each row
+        int row[8];
+        int rowCount = 8;
+        // Why not array?
         int checkCount = 1;
         bool click = false;
         int buttonX = 700;
